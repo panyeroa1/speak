@@ -52,7 +52,7 @@ export const useLiveApi = () => {
   // Retry Logic Refs
   const isIntentionalDisconnectRef = useRef(false);
   const reconnectAttemptRef = useRef(0);
-  const retryTimeoutRef = useRef<NodeJS.Timeout | null>(null);
+  const retryTimeoutRef = useRef<any | null>(null);
   const connectRef = useRef<(() => Promise<void>) | null>(null);
   const MAX_RETRIES = 3;
 

@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import LiveAgent from './components/LiveAgent';
 import ChatInterface from './components/ChatInterface';
 import ThinkingMode from './components/ThinkingMode';
@@ -8,7 +8,28 @@ import { AppMode } from './types';
 import { Mic2, MessageSquare, BrainCircuit, FileAudio, Settings as SettingsIcon } from 'lucide-react';
 
 const App: React.FC = () => {
-  const [mode, setMode] = useState<AppMode>(AppMode.LIVE_AGENT);
+  // Initialize mode from localStorage or default to LIVE_AGENT
+  const [mode, setMode] = useState<AppMode>(() => {
+    try {
+        const savedMode = localStorage.getItem('eburon_app_mode');
+        // Validate that the saved mode is a valid AppMode enum value
+        if (savedMode && Object.values(AppMode).includes(savedMode as AppMode)) {
+          return savedMode as AppMode;
+        }
+    } catch (e) {
+        console.warn("Failed to read app mode from storage", e);
+    }
+    return AppMode.LIVE_AGENT;
+  });
+
+  // Persist mode changes to localStorage
+  useEffect(() => {
+    try {
+        localStorage.setItem('eburon_app_mode', mode);
+    } catch (e) {
+        console.warn("Failed to save app mode to storage", e);
+    }
+  }, [mode]);
 
   return (
     <div className="flex flex-col h-screen bg-black overflow-hidden font-sans">

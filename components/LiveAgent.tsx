@@ -1,4 +1,3 @@
-
 import React, { useEffect, useRef, useState } from 'react';
 import { useLiveApi } from '../hooks/useLiveApi';
 import AudioVisualizer from './AudioVisualizer';
@@ -6,11 +5,12 @@ import { Mic, PhoneOff, Radio, Loader2, RefreshCw, Settings2, HelpCircle } from 
 
 const LiveAgent: React.FC = () => {
   const { connect, disconnect, sendText, status, transcription } = useLiveApi();
-  const silenceTimerRef = useRef<NodeJS.Timeout | null>(null);
-  const disconnectTimerRef = useRef<NodeJS.Timeout | null>(null);
+  const silenceTimerRef = useRef<any | null>(null);
+  const disconnectTimerRef = useRef<any | null>(null);
   const isFinishedRef = useRef(false);
   const isConcludingRef = useRef(false);
   const hasStartedRef = useRef(false);
+  const isUserTurnRef = useRef(false);
   const lastUserActivityRef = useRef<number>(Date.now());
 
   // Local state for configuration display
@@ -81,9 +81,15 @@ const LiveAgent: React.FC = () => {
     if (!status.isConnected) {
         isFinishedRef.current = false;
         isConcludingRef.current = false;
+        isUserTurnRef.current = false;
         if (silenceTimerRef.current) clearTimeout(silenceTimerRef.current);
         if (disconnectTimerRef.current) clearTimeout(disconnectTimerRef.current);
         return;
+    }
+
+    // Reset user turn if agent starts speaking
+    if (status.isSpeaking) {
+        isUserTurnRef.current = false;
     }
 
     // 1. Check for Finish Keywords in User Transcription
@@ -120,7 +126,8 @@ const LiveAgent: React.FC = () => {
     }
 
     // 3. Auto-Continue Logic (Normal Operation)
-    if (!isFinishedRef.current) {
+    // Skip if finished or if it's the user's turn (Ask Now mode)
+    if (!isFinishedRef.current && !isUserTurnRef.current) {
         if (status.isSpeaking) {
             // Agent is speaking: Clear timer
             if (silenceTimerRef.current) clearTimeout(silenceTimerRef.current);
@@ -135,7 +142,7 @@ const LiveAgent: React.FC = () => {
                 // Reduced wait time from 1500ms to 800ms for faster response
                 if (timeSinceUserActivity > 800) {
                     // Send strict silent continuation directive
-                    sendText("[SYSTEM] CONTINUATION SIGNAL: The audio stream paused. Resume your speech immediately from where you stopped. Do not acknowledge this interruption."); 
+                    sendText("[SYSTEM INTERRUPT] CONTINUATION SIGNAL: The audio stream paused. Resume your speech immediately from where you stopped. Do not acknowledge this interruption."); 
                 }
             }, 100); // Instantly check (100ms) to prevent long pauses
         }
@@ -158,11 +165,12 @@ const LiveAgent: React.FC = () => {
           clearTimeout(silenceTimerRef.current);
       }
 
-      // Reset conclusion state to allow Q&A
+      // Reset conclusion state and set User Turn to allow Q&A
       isFinishedRef.current = false;
       isConcludingRef.current = false;
+      isUserTurnRef.current = true;
 
-      sendText("[SYSTEM INTERRUPT] USER QUESTION PROTOCOL:\n1. Stop your presentation immediately.\n2. Acknowledge the user's question first (e.g. \"That is a valid point regarding...\").\n3. Answer the question in real-time, but STRICTLY within the scope of the current topic. DO NOT invent information. Elaborate on known facts only.\n4. If the question is unclear, ask for clarification.\n5. Ready to listen.");
+      sendText("[SYSTEM INTERRUPT] USER QUESTION PROTOCOL:\n1. Stop presentation immediately.\n2. Acknowledge the user's question first.\n3. Answer in real-time.\n   - SCOPE: Strictly within the current topic.\n   - CONSTRAINT: Elaborate on known facts only. DO NOT invent information.\n4. If the question is unclear, ask for clarification.\n5. Ready to listen.");
   };
 
   return (
