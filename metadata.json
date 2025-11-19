@@ -1,0 +1,9 @@
+{
+  "name": "Speaker",
+  "description": "A multi-modal intelligence system unifying conversation, development, and operations. Features Gemini Live audio, reasoning, and ground search.",
+  "requestFramePermissions": [
+    "microphone",
+    "camera",
+    "geolocation"
+  ]
+}
