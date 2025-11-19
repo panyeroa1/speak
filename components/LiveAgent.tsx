@@ -66,11 +66,10 @@ const LiveAgent: React.FC = () => {
     if (status.isConnected && !hasStartedRef.current) {
       hasStartedRef.current = true;
       // Send the start trigger command
-      // Wait 1.5 seconds to ensure connection stability before triggering speech
-      // We want it to feel "Auto Start" but need to avoid race conditions with the audio pipeline
+      // Wait 500ms to ensure connection stability before triggering speech
       setTimeout(() => {
-          sendText("START BROADCAST NOW. Begin the presentation immediately. Speak continuously. Do not stop. If you must pause, use a filler sound, then continue. Go.");
-      }, 1500);
+          sendText("start explaining now");
+      }, 500);
     } else if (!status.isConnected) {
       hasStartedRef.current = false;
     }

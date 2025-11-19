@@ -1,9 +1,8 @@
 
-
 import React, { useState, useEffect } from 'react';
-import { Settings as SettingsIcon, ChevronDown, FileText, CheckCircle, Mic, Globe, Save, Cloud, AlertCircle, Loader2, Volume2, Plus, X } from 'lucide-react';
+import { Settings as SettingsIcon, ChevronDown, FileText, CheckCircle, Mic, Globe, Save, Cloud, AlertCircle, Loader2, Volume2, Plus, X, UserCheck } from 'lucide-react';
 import { supabase, getSessionId } from '../utils/supabaseClient';
-import { EBURON_TOPICS } from '../constants';
+import { EBURON_TOPICS, AVAILABLE_PERSONAS } from '../constants';
 
 interface CustomTopic {
     id: string;
@@ -16,6 +15,7 @@ const Settings: React.FC = () => {
   const [voiceStyle, setVoiceStyle] = useState<string>('Dutch Flemish expressive');
   const [language, setLanguage] = useState<string>('English');
   const [voiceName, setVoiceName] = useState<string>('Orus');
+  const [personaId, setPersonaId] = useState<string>('investment_strategist');
   const [customTopics, setCustomTopics] = useState<CustomTopic[]>([]);
 
   const [isSaved, setIsSaved] = useState(false);
@@ -32,11 +32,13 @@ const Settings: React.FC = () => {
       const localVoiceStyle = localStorage.getItem('eburon_voice_style');
       const localLang = localStorage.getItem('eburon_language');
       const localVoiceName = localStorage.getItem('eburon_voice_name');
+      const localPersonaId = localStorage.getItem('eburon_system_persona');
 
       if (localTopic) setTopic(localTopic);
       if (localVoiceStyle) setVoiceStyle(localVoiceStyle);
       if (localLang) setLanguage(localLang);
       if (localVoiceName) setVoiceName(localVoiceName);
+      if (localPersonaId) setPersonaId(localPersonaId);
 
       fetchSettingsFromSupabase();
       fetchCustomTopics();
@@ -86,6 +88,10 @@ const Settings: React.FC = () => {
                   setLanguage(data.language);
                   localStorage.setItem('eburon_language', data.language);
               }
+              if (data.system_prompt) {
+                  setPersonaId(data.system_prompt);
+                  localStorage.setItem('eburon_system_persona', data.system_prompt);
+              }
               window.dispatchEvent(new Event('eburon_config_updated'));
           }
       } catch (err) {
@@ -104,6 +110,7 @@ const Settings: React.FC = () => {
       localStorage.setItem('eburon_voice_style', voiceStyle);
       localStorage.setItem('eburon_language', language);
       localStorage.setItem('eburon_voice_name', voiceName);
+      localStorage.setItem('eburon_system_persona', personaId);
       
       // Dispatch event to notify LiveAgent
       window.dispatchEvent(new Event('eburon_config_updated'));
@@ -118,6 +125,7 @@ const Settings: React.FC = () => {
                   topic, 
                   voice_style: voiceStyle, 
                   language,
+                  system_prompt: personaId,
                   updated_at: new Date().toISOString()
               }, { onConflict: 'session_id' });
           
@@ -126,16 +134,28 @@ const Settings: React.FC = () => {
           setIsSaved(true);
           setTimeout(() => setIsSaved(false), 3000);
       } catch (err: any) {
-          let errorMsg = "Unknown error";
-          if (typeof err === 'string') errorMsg = err;
-          else if (err?.message) errorMsg = err.message;
-          else {
-              try { errorMsg = JSON.stringify(err); } catch (e) { errorMsg = "Unserializable Error"; }
+          let errorText = "Unknown database error";
+          
+          // Robust Error Extraction
+          if (typeof err === 'string') {
+              errorText = err;
+          } else if (err instanceof Error) {
+              errorText = err.message;
+          } else if (typeof err === 'object' && err !== null) {
+              // Try to extract common Supabase/Postgrest error fields
+              errorText = err.message || err.error_description || err.details || err.hint || JSON.stringify(err);
+          }
+          
+          // Clean up unhelpful JSON strings
+          if (errorText === "{}" || errorText === "[]" || !errorText) {
+              errorText = "Network error or Schema mismatch (check DB columns)";
           }
 
           console.error("Failed to save to Cloud DB:", err);
-          setSyncError(`Saved locally. Cloud sync error: ${errorMsg.substring(0, 50)}...`);
-          setIsSaved(true);
+          setSyncError(`Saved locally. Cloud error: ${errorText.substring(0, 80)}...`);
+          
+          // Show saved state anyway since local storage worked
+          setIsSaved(true); 
           setTimeout(() => setIsSaved(false), 4000);
       } finally {
           setIsSyncing(false);
@@ -175,13 +195,28 @@ const Settings: React.FC = () => {
           setNewTopic({ title: '', tagline: '', overview: '' });
       } catch (e: any) {
           console.error("Failed to add topic", e);
-          alert("Failed to add topic: " + e.message);
+          alert("Failed to add topic: " + (e.message || "Unknown error"));
       } finally {
           setIsAddingTopic(false);
       }
   };
 
-  const allTopics = [...EBURON_TOPICS.topics, ...customTopics];
+  // Filter topics based on persona
+  const filteredTopics = [
+      ...EBURON_TOPICS.topics.filter((t: any) => {
+          const allowedPersonas = t.personas || ['investment_strategist'];
+          return allowedPersonas.includes(personaId);
+      }),
+      ...customTopics
+  ];
+
+  // If current topic is not in filtered list (due to persona switch), reset to first available
+  useEffect(() => {
+      const currentTopicExists = filteredTopics.find(t => t.topicTitle === topic);
+      if (!currentTopicExists && filteredTopics.length > 0) {
+          setTopic(filteredTopics[0].topicTitle);
+      }
+  }, [personaId, filteredTopics, topic]);
 
   const voiceStyles = [
     "Dutch Flemish expressive",
@@ -284,6 +319,35 @@ const Settings: React.FC = () => {
       <div className="flex-1 p-6 overflow-y-auto z-10 pb-48">
         <div className="max-w-3xl mx-auto space-y-6">
           
+          {/* System Persona Selector */}
+          <div className="bg-zinc-900/80 backdrop-blur-sm rounded-xl border border-zinc-800 p-6 space-y-4 shadow-lg ring-1 ring-white/5">
+            <div className="flex items-center justify-between">
+                <label className="text-sm text-amber-400 font-medium uppercase tracking-wider flex items-center gap-2">
+                  <UserCheck className="w-4 h-4" />
+                  System Persona / Identity
+                </label>
+                <span className="text-[10px] bg-amber-500/10 text-amber-500 px-2 py-1 rounded border border-amber-500/20">
+                    CORE ROLE
+                </span>
+            </div>
+            
+            <div className="relative group">
+              <select 
+                value={personaId}
+                onChange={(e) => setPersonaId(e.target.value)}
+                className="w-full bg-black/50 border border-amber-500/30 rounded-lg p-4 appearance-none focus:border-amber-500 outline-none text-white font-mono text-sm transition-colors cursor-pointer group-hover:border-amber-500/50"
+              >
+                {AVAILABLE_PERSONAS.map((p) => (
+                     <option key={p.id} value={p.id}>{p.label}</option>
+                ))}
+              </select>
+              <ChevronDown className="absolute right-4 top-1/2 -translate-y-1/2 w-5 h-5 text-zinc-500 pointer-events-none" />
+            </div>
+            <p className="text-xs text-zinc-500 italic px-1">
+               This defines the core personality (e.g., Investment Strategist vs MLM Trainer).
+            </p>
+          </div>
+
           {/* Topic Selector */}
           <div className="bg-zinc-900/80 backdrop-blur-sm rounded-xl border border-zinc-800 p-6 space-y-4 shadow-lg">
             <div className="flex items-center justify-between">
@@ -291,8 +355,8 @@ const Settings: React.FC = () => {
                   <FileText className="w-4 h-4" />
                   Active Knowledge Topic
                 </label>
-                <span className="text-[10px] bg-amber-500/10 text-amber-500 px-2 py-1 rounded border border-amber-500/20">
-                    READY
+                <span className="text-[10px] bg-zinc-800 text-zinc-500 px-2 py-1 rounded border border-zinc-700">
+                    CONTENT
                 </span>
             </div>
             
@@ -302,7 +366,7 @@ const Settings: React.FC = () => {
                 onChange={(e) => setTopic(e.target.value)}
                 className="w-full bg-black/50 border border-zinc-700 rounded-lg p-4 appearance-none focus:border-amber-500 outline-none text-white font-mono text-sm transition-colors cursor-pointer group-hover:border-zinc-600"
               >
-                {allTopics.map((t, idx) => (
+                {filteredTopics.map((t, idx) => (
                      <option key={`${t.id}_${idx}`} value={t.topicTitle}>{t.topicTitle}</option>
                 ))}
               </select>

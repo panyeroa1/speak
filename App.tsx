@@ -84,7 +84,7 @@ const App: React.FC = () => {
             active={mode === AppMode.LIVE_AGENT} 
             onClick={() => setMode(AppMode.LIVE_AGENT)} 
             icon={<Mic2 />} 
-            label="Orus" 
+            label="Speaker" 
         />
         <NavButton 
             active={mode === AppMode.CHAT} 

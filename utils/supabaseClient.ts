@@ -1,3 +1,4 @@
+
 import { createClient } from '@supabase/supabase-js';
 
 const SUPABASE_URL = 'https://dzthyzgsclutgsktumdq.supabase.co';
@@ -24,7 +25,8 @@ export const getSessionId = () => {
     updated_at timestamp with time zone default timezone('utc'::text, now()) not null,
     topic text,
     voice_style text,
-    language text
+    language text,
+    system_prompt text -- Newly added for saving persona preferences
   );
 
   2. Chat History Table:

@@ -1,7 +1,8 @@
+
 import { useState, useRef, useCallback, useEffect } from 'react';
 import { GoogleGenAI, LiveServerMessage, Modality } from '@google/genai';
 import { 
-    ORUS_SYSTEM_PROMPT, 
+    AVAILABLE_PERSONAS,
     EBURON_TOPICS,
     FLEMISH_EXPRESSIONS_CONTENT,
     TAGALOG_EXPRESSIONS_CONTENT,
@@ -22,6 +23,33 @@ import { createPcmBlob, base64ToUint8Array, decodeAudioData, downsampleBuffer } 
 import { LiveStatus } from '../types';
 import { supabase, getSessionId } from '../utils/supabaseClient';
 
+// AudioWorklet code to run off-main-thread audio processing
+const WORKLET_CODE = `
+class RecorderProcessor extends AudioWorkletProcessor {
+  constructor() {
+    super();
+    this.bufferSize = 4096;
+    this.buffer = new Float32Array(this.bufferSize);
+    this.index = 0;
+  }
+  process(inputs) {
+    const input = inputs[0];
+    if (input && input.length > 0) {
+      const channelData = input[0];
+      for (let i = 0; i < channelData.length; i++) {
+        this.buffer[this.index++] = channelData[i];
+        if (this.index >= this.bufferSize) {
+          this.port.postMessage(this.buffer.slice());
+          this.index = 0;
+        }
+      }
+    }
+    return true;
+  }
+}
+registerProcessor('recorder-processor', RecorderProcessor);
+`;
+
 export const useLiveApi = () => {
   const [status, setStatus] = useState<LiveStatus>({
     isConnected: false,
@@ -35,19 +63,22 @@ export const useLiveApi = () => {
   const audioContextRef = useRef<AudioContext | null>(null);
   const inputAudioContextRef = useRef<AudioContext | null>(null);
   const streamRef = useRef<MediaStream | null>(null);
-  const processorRef = useRef<ScriptProcessorNode | null>(null);
+  const workletNodeRef = useRef<AudioWorkletNode | null>(null);
   const sourceRef = useRef<MediaStreamAudioSourceNode | null>(null);
   const outputAnalyserRef = useRef<AnalyserNode | null>(null);
   const nextStartTimeRef = useRef<number>(0);
   const sessionRef = useRef<any>(null);
   const [transcription, setTranscription] = useState<string>('');
   const volumeGainNodeRef = useRef<GainNode | null>(null);
+  const keepAliveOscRef = useRef<OscillatorNode | null>(null);
   
   // Sync Refs for Audio Loop
   const isSpeakingRef = useRef(false);
   const rafRef = useRef<number | null>(null);
   const micVolumeRef = useRef<number>(0);
-  const activeSessionIdRef = useRef<string>('');
+  
+  // This tracks the ephemeral connection attempt to handle race conditions
+  const activeConnectionIdRef = useRef<string>('');
 
   // Retry Logic Refs
   const isIntentionalDisconnectRef = useRef(false);
@@ -55,6 +86,17 @@ export const useLiveApi = () => {
   const retryTimeoutRef = useRef<any | null>(null);
   const connectRef = useRef<(() => Promise<void>) | null>(null);
   const MAX_RETRIES = 3;
+
+  // Helper to get persistent session ID as requested
+  // This ID allows the server to theoretically track context across reloads (if backend supported it)
+  const getPersistentSessionId = () => {
+      let id = localStorage.getItem('eburon_live_session_id');
+      if (!id) {
+          id = crypto.randomUUID();
+          localStorage.setItem('eburon_live_session_id', id);
+      }
+      return id;
+  };
 
   const connect = useCallback(async () => {
     // Prevent double connection
@@ -70,8 +112,14 @@ export const useLiveApi = () => {
     }));
 
     isIntentionalDisconnectRef.current = false;
-    const currentSessionId = crypto.randomUUID();
-    activeSessionIdRef.current = currentSessionId;
+    
+    // Generate a unique ID for THIS specific connection attempt (race condition guard)
+    const connectionId = crypto.randomUUID();
+    activeConnectionIdRef.current = connectionId;
+
+    // Retrieve persistent session ID (user requirement)
+    const persistentSessionId = getPersistentSessionId();
+    console.log(`Connecting with Persistent Live Session ID: ${persistentSessionId}`);
 
     try {
         if(!process.env.API_KEY) {
@@ -89,6 +137,15 @@ export const useLiveApi = () => {
       
       if (audioCtx.state === 'suspended') await audioCtx.resume();
       if (inputCtx.state === 'suspended') await inputCtx.resume();
+
+      // KEEP-ALIVE: Play a silent sound to prevent browser from suspending the context in background
+      const silentOsc = audioCtx.createOscillator();
+      const silentGain = audioCtx.createGain();
+      silentGain.gain.value = 0.001; // Minimal gain to keep active but inaudible
+      silentOsc.connect(silentGain);
+      silentGain.connect(audioCtx.destination);
+      silentOsc.start();
+      keepAliveOscRef.current = silentOsc;
 
       audioContextRef.current = audioCtx;
       inputAudioContextRef.current = inputCtx;
@@ -163,12 +220,17 @@ export const useLiveApi = () => {
       streamRef.current = stream;
 
       // Build System Instruction
-      let systemInstruction = ORUS_SYSTEM_PROMPT;
+      // 1. Get Selected Persona
+      const savedPersonaId = localStorage.getItem('eburon_system_persona') || 'investment_strategist';
+      const selectedPersona = AVAILABLE_PERSONAS.find(p => p.id === savedPersonaId) || AVAILABLE_PERSONAS[0];
+      
+      // Fallback if persona ID is valid but prompt is missing for some reason (safety check)
+      let systemInstruction = selectedPersona.prompt || AVAILABLE_PERSONAS[0].prompt;
       
       const selectedTopicTitle = localStorage.getItem('eburon_topic') || 'Eburon Aegis Vision';
       let topicContent = "";
 
-      // 1. Look up in default static topics
+      // 2. Look up in default static topics
       const defaultTopic = EBURON_TOPICS.topics.find(t => 
           t.topicTitle === selectedTopicTitle || 
           t.topicTitle.includes(selectedTopicTitle)
@@ -177,7 +239,7 @@ export const useLiveApi = () => {
       if (defaultTopic) {
           topicContent = defaultTopic.overview;
       } else {
-          // 2. Look up in custom topics from Supabase
+          // 3. Look up in custom topics from Supabase
           try {
               const sessionId = getSessionId();
               const { data } = await supabase
@@ -237,6 +299,7 @@ export const useLiveApi = () => {
          - **BREATHY DELIVERY:** Maintain a soft, breathy, naturally imperfect delivery throughout.
          - **ADDRESSING:** Use native address terms (e.g. "My friend", "Yaar", "Mone", "Habeebi") suited to the selected culture.
       2. OUTPUT LANGUAGE: You must speak in "${language}".
+      3. SESSION CONTEXT: Persistent Session ID: ${persistentSessionId}
       
       *** FINAL AUDIO TAG ENFORCEMENT ***
       - DO NOT SPEAK BRACKETED TEXT.
@@ -255,8 +318,8 @@ export const useLiveApi = () => {
           inputAudioTranscription: {},
         },
         callbacks: {
-          onopen: () => {
-            if (activeSessionIdRef.current !== currentSessionId) return;
+          onopen: async () => {
+            if (activeConnectionIdRef.current !== connectionId) return;
 
             setStatus(s => ({ 
                 ...s, 
@@ -269,56 +332,61 @@ export const useLiveApi = () => {
             
             reconnectAttemptRef.current = 0;
             
-            // Setup Input Processing
+            // Setup Input Processing with AudioWorklet for Background Stability
             if (!inputAudioContextRef.current) return;
             
             const inputContext = inputAudioContextRef.current;
             const actualSampleRate = inputContext.sampleRate;
             
-            const source = inputContext.createMediaStreamSource(stream);
-            const processor = inputContext.createScriptProcessor(4096, 1, 1);
-            
-            processor.onaudioprocess = (e) => {
-              // Safety check: Don't process if we are disconnected or session mismatch
-              if (activeSessionIdRef.current !== currentSessionId) return;
+            // Load Worklet
+            try {
+                const blob = new Blob([WORKLET_CODE], { type: 'application/javascript' });
+                const workletUrl = URL.createObjectURL(blob);
+                await inputContext.audioWorklet.addModule(workletUrl);
 
-              const inputData = e.inputBuffer.getChannelData(0);
-              
-              // Visualizer logic
-              let sum = 0;
-              for(let i=0; i<inputData.length; i++) sum += inputData[i] * inputData[i];
-              const rms = Math.sqrt(sum / inputData.length);
-              micVolumeRef.current = rms * 3; 
+                const source = inputContext.createMediaStreamSource(stream);
+                const workletNode = new AudioWorkletNode(inputContext, 'recorder-processor');
 
-              // Downsample if necessary (Browser rarely honors 16000Hz requests perfectly)
-              const processedData = downsampleBuffer(inputData, actualSampleRate, 16000);
+                workletNode.port.onmessage = (e) => {
+                    // Safety check: Don't process if we are disconnected or session mismatch
+                    if (activeConnectionIdRef.current !== connectionId) return;
 
-              // Create blob and send
-              const pcmBlob = createPcmBlob(processedData);
-              
-              sessionPromise.then(session => {
-                try {
-                    if (activeSessionIdRef.current === currentSessionId) {
-                        session.sendRealtimeInput({ media: pcmBlob });
-                    }
-                } catch (e) {
-                    // Ignore send errors
-                }
-              }).catch(() => {}); // Catch promise rejection
-            };
+                    const inputData = e.data; // Float32Array from worklet
 
-            source.connect(processor);
-            
-            const gainNode = inputContext.createGain();
-            gainNode.gain.value = 0; 
-            processor.connect(gainNode);
-            gainNode.connect(inputContext.destination);
-            
-            sourceRef.current = source;
-            processorRef.current = processor;
+                    // Visualizer logic (RMS)
+                    let sum = 0;
+                    for(let i=0; i<inputData.length; i++) sum += inputData[i] * inputData[i];
+                    const rms = Math.sqrt(sum / inputData.length);
+                    micVolumeRef.current = rms * 3; 
+
+                    // Downsample if necessary
+                    const processedData = downsampleBuffer(inputData, actualSampleRate, 16000);
+
+                    // Create blob and send
+                    const pcmBlob = createPcmBlob(processedData);
+                    
+                    sessionPromise.then(session => {
+                        try {
+                            if (activeConnectionIdRef.current === connectionId) {
+                                session.sendRealtimeInput({ media: pcmBlob });
+                            }
+                        } catch (e) {
+                            // Ignore send errors
+                        }
+                    }).catch(() => {});
+                };
+
+                source.connect(workletNode);
+                workletNode.connect(inputContext.destination); // Needed to keep node alive in some browsers
+
+                sourceRef.current = source;
+                workletNodeRef.current = workletNode;
+            } catch (err) {
+                console.error("Worklet setup failed", err);
+            }
           },
           onmessage: async (msg: LiveServerMessage) => {
-            if (activeSessionIdRef.current !== currentSessionId) return;
+            if (activeConnectionIdRef.current !== connectionId) return;
 
             if (msg.serverContent?.modelTurn?.parts?.[0]?.inlineData?.data) {
               const audioData = msg.serverContent.modelTurn.parts[0].inlineData.data;
@@ -366,7 +434,7 @@ export const useLiveApi = () => {
             }
           },
           onclose: () => {
-            if (activeSessionIdRef.current !== currentSessionId) return;
+            if (activeConnectionIdRef.current !== connectionId) return;
             setStatus(s => ({ ...s, isConnected: false, isConnecting: false, isListening: false }));
             sessionRef.current = null;
             if (!isIntentionalDisconnectRef.current) {
@@ -374,7 +442,7 @@ export const useLiveApi = () => {
             }
           },
           onerror: (e) => {
-            if (activeSessionIdRef.current !== currentSessionId) return;
+            if (activeConnectionIdRef.current !== connectionId) return;
             console.error("Live API Error", e);
             
             let errorMessage = "Unknown Live API Error";
@@ -431,13 +499,23 @@ export const useLiveApi = () => {
   }, [connect]);
 
   const cleanupAudioNodes = () => {
+      if (keepAliveOscRef.current) {
+          try { 
+              keepAliveOscRef.current.stop(); 
+              keepAliveOscRef.current.disconnect();
+          } catch(e) {}
+          keepAliveOscRef.current = null;
+      }
       if (sourceRef.current) {
           try { sourceRef.current.disconnect(); } catch(e) {}
           sourceRef.current = null;
       }
-      if (processorRef.current) {
-          try { processorRef.current.disconnect(); } catch(e) {}
-          processorRef.current = null;
+      if (workletNodeRef.current) {
+          try { 
+              workletNodeRef.current.disconnect(); 
+              workletNodeRef.current.port.onmessage = null;
+          } catch(e) {}
+          workletNodeRef.current = null;
       }
       if (streamRef.current) {
           streamRef.current.getTracks().forEach(t => t.stop());
@@ -476,7 +554,7 @@ export const useLiveApi = () => {
 
   const disconnect = useCallback(() => {
     isIntentionalDisconnectRef.current = true;
-    activeSessionIdRef.current = ''; // Invalidate session immediately
+    activeConnectionIdRef.current = ''; // Invalidate session immediately
     
     if (retryTimeoutRef.current) clearTimeout(retryTimeoutRef.current);
     reconnectAttemptRef.current = 0;
