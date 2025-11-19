@@ -1,3 +1,4 @@
+
 import React, { useEffect, useRef, useState } from 'react';
 import { useLiveApi } from '../hooks/useLiveApi';
 import AudioVisualizer from './AudioVisualizer';
@@ -65,11 +66,11 @@ const LiveAgent: React.FC = () => {
     if (status.isConnected && !hasStartedRef.current) {
       hasStartedRef.current = true;
       // Send the start trigger command
-      // Wait 4 seconds (increased from 2s) to ensure connection stability before triggering speech
-      // "Internal Error" often happens if text is sent while audio pipeline is still initializing
+      // Wait 1.5 seconds to ensure connection stability before triggering speech
+      // We want it to feel "Auto Start" but need to avoid race conditions with the audio pipeline
       setTimeout(() => {
-          sendText("START BROADCAST NOW. Begin the 8-minute presentation immediately. Speak continuously. Do not stop. If you must pause, use a filler sound, then continue. Go.");
-      }, 4000);
+          sendText("START BROADCAST NOW. Begin the presentation immediately. Speak continuously. Do not stop. If you must pause, use a filler sound, then continue. Go.");
+      }, 1500);
     } else if (!status.isConnected) {
       hasStartedRef.current = false;
     }

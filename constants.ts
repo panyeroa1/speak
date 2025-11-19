@@ -1,5 +1,3 @@
-
-
 export const ORUS_SYSTEM_PROMPT = `
 You are a world-class Tech Investment Strategist and Product Visionary. Your job is to unveil a specific technology or system to high-net-worth investors and Venture Capitalists.
 
@@ -155,450 +153,6 @@ Use these expressions **sparingly and naturally** to sound like a real person pi
 Explain the users given topic like YOU are the one who created it or like you own it. Use a natural, confident human expressive way using the **selected Accent/Style** (e.g. Deep Dutch Flemish) but use the **selected Language** (e.g. English) to deliver it. Add humour but make sure to deliver the topic pitch like pitching it to the investors. It is not too salesy but it must give all the "why am I investing on that particular app or system or tech". Make it that all the listeners will rush to their bank or will send their investments once the Voice Agent finishes explaining it.
 `;
 
-export const DECOBU_SECURITY_CONTENT = `
-TOPIC: Decobu Messenger Security Protocol
-
-PITCH ANGLE: The Only Secure Comms Platform for the Post-Privacy Era.
-
-MARKET GAP:
-- Every major messenger (WhatsApp, Telegram) is compromised or leaks metadata.
-- Corporations and High-Net-Worth Individuals (HNWIs) are losing billions to industrial espionage.
-- There is NO true "Zero-Trust" mobile tool for the C-Suite.
-
-THE SOLUTION (The "Black Box"):
-- Decobu is a digital fortress.
-- **Key Differentiator:** Packet Shuffling Protocol. We don't just encrypt the message; we mask the traffic signature so it looks like random noise or YouTube traffic.
-- **Ram-Only Relays:** We physically cannot be subpoenaed for data because we don't store it.
-
-THE BUSINESS MODEL:
-- Premium B2B Subscriptions ($50/user/month). Cheap for a CEO, expensive for a consumer.
-- Enterprise Licensing: "Decobu Red" for internal corporate networks.
-- Margins: 90%+. Software infrastructure with minimal overhead.
-
-THE MOAT:
-- Proprietary "Double-Ratchet" variation + Post-Quantum crypto.
-- Network Effects: Once a board uses it, their lawyers and bankers must use it too.
-- Brand Trust: We are the "Rolex" of privacy.
-
-THE VISION:
-- We become the standard for secure transactions, legal comms, and government ops.
-- An acquisition target for defense contractors or a standalone IPO.
-`;
-
-export const EBURON_FLYER_CONTENT = `
-TOPIC: Eburon Flyer
-TITLE: EBURON FLYER PROJECT — FULL SCOPE AND MAIN OBJECTIVE
-
-## 1. Introduction
-Humanity’s dependence on ground-based transportation has shaped the modern world—roads, trucks, and fossil fuels have carried industry and civilization forward. Yet these systems are costly, carbon-heavy, and geographically limited. In many regions, especially those defined by mountains, forests, or dispersed islands, land transport becomes either prohibitively expensive or technically impossible.
-The **Eburon Flyer Project** arises from this constraint as a practical and visionary alternative: a low-power, helium-lifted aerial mobility platform that replaces brute-force propulsion with the elegance of buoyancy. Rather than burning energy to fight gravity, the Eburon Flyer floats within it—sustained by physics, guided by autonomy, and powered by renewable energy.
-Eburon Flyer aims to **redefine how we move goods and people through the air** by combining the time-tested principle of lighter-than-air flight with modern materials, AI-assisted navigation, and decentralized solar-electric systems. Its mission is simple yet profound: **to make aerial transport cheaper than land travel**, scalable from individual food deliveries to large-scale cargo logistics and eco-tourism.
-
-## 2. Project Overview
-The Eburon Flyer platform is conceived as a **modular family of buoyant flyers** that span three scales:
-1. **Micro-Flyers** — palm-to-backpack-sized helium drones designed for local delivery of small goods such as food, medicine, and parcels within urban or semi-urban areas.
-2. **Meso-Flyers** — mid-sized craft for rural logistics, capable of carrying up to several hundred kilograms of cargo over distances up to 100 km, powered primarily by solar energy and compressed-air propulsion.
-3. **Macro-Flyers** — passenger-capable airships for low-altitude tourism, forest observation, and humanitarian access to road-less environments.
-Each model operates under the same principles: helium buoyancy to reduce weight, electric or compressed-air propulsion for motion, and AI-based flight optimization to minimize energy use.
-Unlike conventional drones or aircraft, **Eburon Flyer does not rely on high-thrust engines or extensive runway infrastructure**. Its efficiency lies in the physics of displacement—Archimedes’ principle in gaseous form—where lift is achieved by the mass of air displaced by helium, a gas lighter than the surrounding atmosphere.
-
-## 3. Mission Statement
-Eburon Flyer’s mission is to **revolutionize aerial mobility** through sustainable buoyant flight, enabling new economic, ecological, and humanitarian pathways.
-By combining helium lift with solar-electric power, we aim to **create a network of autonomous flyers** that can deliver food, goods, and access to communities previously unreachable—while consuming only a fraction of the energy used by traditional air or land transport.
-
-## 4. Vision Statement
-The vision of Eburon Flyer is to **democratize flight**—making it as accessible and affordable as road transport, yet cleaner and quieter. We see a future sky populated not by roaring machines, but by **graceful, self-sustaining flyers** that connect humanity across geography, culture, and climate.
-This future reimagines air mobility as a **commons**—not the privilege of airlines, but the daily utility of citizens, farmers, explorers, and first responders.
-Our ultimate ambition is to position Eburon Flyer as the **baseline technology for sustainable atmospheric logistics**, aligning innovation with planetary balance.
-
-## 5. Scientific Foundations
-### 5.1 Buoyancy and Helium Lift
-Eburon Flyer’s primary lifting mechanism follows **Archimedes’ principle**: a body immersed in a fluid experiences an upward force equal to the weight of the fluid it displaces.
-At sea level, air density averages 1.225 kg/m³. Helium, at the same temperature and pressure, has a density of about 0.1786 kg/m³. Therefore, each cubic meter of helium can theoretically lift **≈1.047 kg**, less the weight of the envelope and structure.
-Helium’s non-flammability and chemical inertness make it safer than hydrogen, while its atomic simplicity minimizes molecular diffusion through composite materials.
-### 5.2 Gas Containment
-The efficiency of helium use depends on the integrity of its containment. The Eburon Flyer’s envelope is made of **multi-layer laminate polymers** combining high-strength fabric with ultra-low permeability coatings such as ethylene-vinyl alcohol (EVOH). Embedded nanocomposite layers reduce gas diffusion by over 60 %, extending operational life beyond one year per refill.
-### 5.3 Energy Model
-Traditional drones consume 100–200 Wh per kilometer; Eburon Flyer targets **under 10 Wh/km** by offloading most lift to helium. Its propulsion system uses small air-compressor jet engines that accelerate ambient air, providing directional thrust with minimal energy expenditure.
-Solar panels embedded on the upper envelope harvest 200–300 W/m² in daylight. Paired with solid-state lithium-sulfur or graphene batteries, the craft can remain airborne continuously with modest diurnal energy storage.
-### 5.4 Compressed-Air Jet Propulsion
-Rather than burning fuel, Eburon Flyer’s propulsion relies on **pressurized air release through precision nozzles**. Electric compressors draw in and store air in carbon-fiber tanks. When released, this air accelerates through a variable-geometry nozzle, creating silent thrust.
-This method avoids combustion, reducing both acoustic and thermal signatures—ideal for urban or environmental operations.
-### 5.5 Control and Stability
-Autonomous stability is achieved through a combination of:
-* **Trimable ballast** using micro-compressors to balance buoyancy.
-* **AI flight controller** with feedback loops from gyroscopes, pressure sensors, and GPS.
-* **Vector-thrust control** using compressor nozzles for yaw and pitch adjustments.
-### 5.6 Environmental Footprint
-Eburon Flyer produces **zero direct emissions** and virtually no noise. Its low altitude (typically < 200 m) avoids interference with commercial aviation while reducing visual and acoustic pollution.
-Every kilogram of payload lifted by helium replaces approximately 0.5 liters of gasoline worth of CO₂ emissions in comparable drone delivery systems.
-
-## 6. Design Philosophy
-### 6.1 Simplicity over Force
-Where conventional flight demands energy to overcome gravity, Eburon Flyer uses physics to avoid that fight altogether.
-By floating naturally, propulsion serves only navigation—not lift—cutting power needs by 70–90 %.
-### 6.2 Scalability and Modularity
-The platform’s modular architecture allows interchangeable components:
-* Envelope sizes ranging from 1 m³ to 400 m³.
-* Swappable propulsion units (single, twin, or vector).
-* Modular payload compartments for cargo, camera, or passenger modules.
-### 6.3 Autonomy and AI Integration
-Each flyer contains an onboard **Eburon Neural Flight Core (ENFC)**:
-* Adaptive pathfinding optimized for wind and solar conditions.
-* AI-based collision avoidance and no-fly-zone awareness.
-* Self-diagnostic health monitoring for predictive maintenance.
-### 6.4 Materials and Construction
-The structure uses carbon-fiber frames with graphene-reinforced joints, balancing rigidity with minimal mass. The helium chamber maintains shape under internal pressure, while flexible solar films adhere seamlessly across the dorsal surface.
-
-## 7. Use-Case Domains
-### 7.1 Urban Food and Parcel Delivery
-In congested megacities, conventional drones face limits—short range, battery depletion, and noise.
-The Eburon Micro-Flyer replaces them with a **silent, buoyant courier** that hovers over traffic lanes, powered by sunlight and helium lift.
-Its delivery module descends via micro-winch to precise GPS coordinates, consuming less than 5 % of the energy used by rotor-based drones.
-### 7.2 Cargo and Supply Chain Support
-Eburon Meso-Flyers can handle mid-weight cargo such as agricultural produce, spare parts, or humanitarian supplies.
-Operating at 60–100 km range with minimal infrastructure, they enable **point-to-point logistics** between rural suppliers and urban centers without dependence on roads.
-### 7.3 Tourism and Exploration
-Eburon Macro-Flyers open access to landscapes unreachable by road—rainforests, highlands, island chains.
-Their slow, stable, silent movement creates a **floating observatory experience** that merges exploration with conservation, leaving no environmental trace.
-### 7.4 Emergency and Humanitarian Relief
-In flood, earthquake, or war zones where infrastructure collapses, buoyant flyers can remain airborne for days, carrying medical kits, food, and communication modules.
-Their ability to hover and land vertically ensures access where helicopters are too costly or dangerous.
-
-## 8. Economic Impact and Comparative Advantage
-### 8.1 Cost Structure
-By reducing energy dependency, the Eburon Flyer achieves **operational costs 5–10× lower than drones or trucks**.
-Helium replenishment is infrequent; maintenance revolves around battery cycling and envelope inspection.
-Solar energy offers near-zero fuel cost after deployment.
-### 8.2 Infrastructure Independence
-Unlike land vehicles that require roads or aircraft that need runways, Eburon Flyer operates **vertically and autonomously**.
-This independence allows service networks to expand in developing regions without heavy capital investment.
-### 8.3 Market Integration
-Initial markets:
-* Urban delivery in high-density Asian and European cities.
-* Cargo logistics for agricultural exporters.
-* Tourism partnerships for aerial eco-tours.
-* Government contracts for disaster response.
-Future expansions may include persistent-airborne communication relays and surveillance systems for environmental monitoring.
-
-## 9. Social and Environmental Contribution
-Eburon Flyer contributes to **social equity** by enabling affordable logistics for remote communities and reducing urban pollution.
-It aligns with **UN SDGs**:
-* **Goal 9:** Industry, Innovation, and Infrastructure
-* **Goal 11:** Sustainable Cities and Communities
-* **Goal 13:** Climate Action
-The project also pioneers a **non-extractive helium management system**, recycling captured gas through return hubs to minimize depletion of global reserves.
-
-## 10. Research Objectives
-1. **Develop a validated physical model** of helium lift performance under varying atmospheric pressures and temperatures.
-2. **Design a prototype compressed-air propulsion system** optimized for continuous low-power thrust.
-3. **Integrate solar energy management systems** with AI-controlled charge balancing.
-4. **Simulate and test autonomous flight stability** in variable wind conditions.
-5. **Establish scalability metrics** to project from micro- to macro-flyers.
-6. **Perform life-cycle assessments** comparing Eburon Flyer emissions to road and drone transport.
-
-## 11. Engineering Architecture
-### 11.1 Subsystems
-* **Envelope Unit:** multi-layer helium containment with embedded sensors for pressure and temperature.
-* **Propulsion Unit:** dual or quad compressor jets for yaw/pitch control and forward motion.
-* **Energy Unit:** solar array + battery + power controller.
-* **Avionics:** GPS, IMU, LIDAR, barometer, AI flight computer.
-* **Payload Interface:** modular dock for delivery box, camera, or passenger pod.
-### 11.2 Software Stack
-* **Eburon OS:** lightweight RTOS with secure OTA updates.
-* **Autonomy Layer:** pathfinding, wind compensation, obstacle mapping.
-* **Fleet Orchestrator:** central AI coordinating multiple flyers for delivery routing and collision avoidance.
-
-## 12. Risk Analysis
-### 12.1 Technical Risks
-* Helium scarcity and cost → mitigated by recovery and recycling systems.
-* Weather sensitivity → solved via predictive routing algorithms and pressure regulation.
-* Material degradation → mitigated by UV-resistant composites.
-### 12.2 Regulatory Risks
-Airspace management remains a developing field. The project will adhere to civil aviation guidelines for low-altitude unmanned systems, integrating transponder beacons and geofencing.
-### 12.3 Market Risks
-Public adoption hinges on trust and cost. Pilot programs with municipal partners and logistic firms will validate performance and safety.
-
-## 13. Deployment Phases
-### **Phase I — Research and Simulation (Year 1)**
-* CFD modeling of helium lift and air compression jets.
-* Material stress testing under UV and thermal cycles.
-* Wind-tunnel trials for stability and control.
-### **Phase II — Prototype and Field Trials (Year 2)**
-* Build micro-flyer prototype for food delivery use-case.
-* Urban flight tests under regulatory supervision.
-* Gather telemetry to refine AI flight controller.
-### **Phase III — Scale Expansion (Year 3–4)**
-* Develop meso-flyer cargo model with 50 kg capacity.
-* Integrate solar-battery hybrid system.
-* Begin commercial pilot projects.
-### **Phase IV — Global Network Deployment (Year 5 +)**
-* Establish regional manufacturing hubs.
-* Deploy fleets across logistics, tourism, and humanitarian sectors.
-* Implement Eburon Cloud Orchestrator for global flight coordination.
-
-## 14. Expected Outcomes
-1. **Operational Energy Reduction:** At least 80 % less power per km compared to conventional drones.
-2. **Cost Reduction:** Delivery costs below $0.02/km kg.
-3. **Sustainability Impact:** > 90 % CO₂ reduction versus combustion-based air transport.
-4. **Accessibility:** Safe flight in populated or remote zones with minimal noise pollution.
-5. **Economic Inclusion:** Enabling micro-business logistics in underserved areas.
-
-## 15. Strategic Partnerships
-Eburon Flyer invites collaboration across:
-* **Universities** for aerodynamics, materials, and AI research.
-* **Energy companies** for solar integration.
-* **Municipal governments** for smart-city deployment.
-* **Humanitarian NGOs** for rapid-response logistics.
-Joint ventures will accelerate scaling while maintaining safety and sustainability standards.
-
-## 16. Ethical and Safety Framework
-Autonomous flight must respect privacy, environmental stewardship, and safety.
-Eburon Flyer incorporates:
-* End-to-end encrypted communication.
-* Automatic altitude limits and emergency descent protocols.
-* Real-time weather adaptation and avoidance systems.
-* Transparent data-sharing policies for regulators.
-The project’s ethical framework treats the **sky as shared space**, guided by responsibility rather than domination.
-
-## 17. Long-Term Vision: The Air Mobility Continuum
-Eburon Flyer represents more than a vehicle—it’s a **mobility philosophy**.
-The same technology enabling a food delivery craft can scale to a regional airship network or inter-island cargo platform.
-Ultimately, Eburon Flyer aims to establish a **permanent atmospheric infrastructure**—a layer of smart, solar, helium-powered flyers continuously operating between ground and satellite networks, forming the **Eburon Sky Grid**.
-
-## 18. Conclusion
-The Eburon Flyer Project stands at the crossroads of physics, sustainability, and human imagination. By fusing the ancient principle of buoyancy with the modern disciplines of AI and renewable energy, it challenges the notion that flight must be loud, expensive, or polluting.
-Its promise lies not only in moving goods faster but in **lifting human potential higher**—creating a quiet revolution in the skies where every cubic meter of helium carries both matter and meaning.
-Eburon Flyer is more than a machine.
-It is a **new language of motion**, one that speaks through silence, sunlight, and air itself.
-`;
-
-export const AEGIS_VISION_CONTENT = `
-TOPIC: Eburon Aegis Vision
-TITLE: Eburon Aegis Vision Security System
-
-## Introduction
-**Aegis Vision Security System** represents the next generation of intelligent surveillance — an AI-driven CCTV platform designed not just to record but to *anticipate, prevent, and protect*. Unlike traditional systems that mainly provide footage for evidence after an incident, Aegis Vision brings real-time intelligence that can intervene before harm occurs. This knowledge base provides a detailed reference for users, administrators, and security professionals on the capabilities, operation, deployment, and value of the Eburon Aegis Vision system.
-
----
-
-## Core Philosophy: Saving Lives Over Saving Evidence
-At the heart of Aegis Vision is a simple but profound principle:
-
-**“Saving life is better than saving evidence.”**
-
-Most CCTV systems today act as passive recorders. They capture data, but they rarely stop an incident in progress. Eburon flips that paradigm. The mission of Aegis Vision is to give businesses, communities, and families peace of mind by preventing danger, not just documenting it. The AI watches with vigilance, listens with intelligence, and acts with precision.
-
----
-
-## Key Features
-
-### 1. **Real-Time Threat Detection**
-- Powered by edge AI modules (e.g., Jetson Orin/Thor cores).
-- Detects suspicious movement patterns, loitering, or aggressive gestures.
-- Recognizes weapons, hazardous objects, and intrusions in restricted zones.
-- Identifies anomalies (e.g., unattended bags in airports, doors forced open in offices).
-
-### 2. **Proactive Alerts & Escalations**
-- Sends **instant alerts** to mobile apps, control rooms, or SMS.
-- Alerts can trigger sirens, lights, or automated voice warnings.
-- For severe threats, Aegis Vision integrates with local law enforcement or private security dispatch systems.
-
-### 3. **Object & Face Recognition**
-- Detects and differentiates between people, pets, and vehicles.
-- Identifies authorized personnel and whitelist members, preventing false alarms.
-- Recognizes returning visitors, flagged individuals, or vehicles with suspicious patterns.
-
-### 4. **Offline-Ready Functionality**
-- Works even when internet is down — thanks to on-device AI inference.
-- Local storage and local decision-making ensure resilience in remote or unstable network environments.
-- Syncs with cloud dashboards when connectivity resumes.
-
-### 5. **Privacy-Aware Design**
-- Offers face-blurring for compliance with GDPR and local privacy laws.
-- Access controls restrict video review to authorized users only.
-- Data retention policies can be tuned (e.g., auto-delete after 30 days).
-
-### 6. **Integration with IoT & Security Systems**
-- Links to **smart locks**, alarms, drones, and PA systems.
-- Can trigger automated lockdowns or open secure paths in emergencies.
-- Works with fire/smoke detectors to distinguish between human threat vs. environmental hazard.
-
----
-
-## Use Cases
-
-### Corporate Security
-- Monitors office perimeters, lobbies, and high-value areas.
-- Flags unauthorized intrusions and insider threats.
-- Generates incident reports automatically for HR/legal use.
-
-### Public Safety
-- Deployed in malls, schools, airports, and public transport stations.
-- Recognizes crowd build-up, panic patterns, or emergency exits being blocked.
-- Supports city-wide safety networks with federated learning.
-
-### Residential Protection
-- Detects intruders before break-ins occur.
-- Alerts homeowners instantly through a mobile app.
-- Differentiates between family members, delivery personnel, and unknown visitors.
-
-### Industrial / Infrastructure
-- Guards warehouses, power plants, and sensitive facilities.
-- Identifies smoke, sparks, or abnormal machine activity.
-- Ensures safety compliance in restricted areas.
-
----
-
-## Technical Architecture
-
-### Hardware
-- **Edge AI Modules**: Jetson Orin/Xavier/Thor for local processing.
-- **Cameras**: 4K, night-vision capable, infrared sensors.
-- **Sensors**: Motion, thermal, acoustic (optional).
-- **Storage**: Local SSD with optional hybrid cloud backup.
-
-### Software
-- **Vision AI**: Object detection, tracking, and recognition.
-- **Predictive Models**: Behavioral analysis for anomaly detection.
-- **Control Dashboard**: Web + mobile apps with real-time feeds.
-- **Alert API**: Connects with Slack, Teams, SMS gateways, or custom software.
-
-### Network
-- **Offline Mode**: Local AI continues operating without internet.
-- **Secure Cloud Sync**: End-to-end encrypted uploads.
-- **Federated Learning**: System learns across multiple deployments without sharing raw footage.
-
----
-
-## Deployment
-
-### Step 1: Site Survey
-- Evaluate entry/exit points, blind spots, and critical assets.
-- Determine camera placements to maximize coverage.
-
-### Step 2: Hardware Installation
-- Mount 4K cameras with wide-angle and zoom options.
-- Deploy edge compute nodes near power/network hubs.
-- Configure local storage redundancy.
-
-### Step 3: AI Model Tuning
-- Define “safe zones” and “restricted zones.”
-- Train whitelists (employees, family, vehicles).
-- Configure sensitivity (reduce false alarms).
-
-### Step 4: Integration
-- Connect with access control, alarms, PA, and IoT devices.
-- Link to command center dashboards.
-
-### Step 5: Testing
-- Run simulated scenarios: intrusion, object detection, loitering.
-- Validate alert speeds and escalation pathways.
-
----
-
-## Advantages Over Traditional CCTV
-
-1. **Preventive vs. Reactive**  
-   - Traditional: Records for after-the-fact evidence.  
-   - Aegis Vision: Prevents incidents by detecting threats in real time.
-
-2. **AI-Driven**  
-   - Traditional: Human operators must monitor dozens of screens.  
-   - Aegis Vision: AI highlights anomalies, reducing fatigue and error.
-
-3. **Offline-Ready**  
-   - Traditional: Cloud dependency leads to downtime.  
-   - Aegis Vision: Works even with no internet.
-
-4. **Integrated Response**  
-   - Traditional: Passive video feed.  
-   - Aegis Vision: Triggers alarms, locks, and communication systems instantly.
-
----
-
-## Example Scenario
-
-### Intrusion Detection
-- **Time:** 2:45 AM  
-- **Event:** Unauthorized person climbing over a warehouse fence.  
-
-**Aegis Vision Response:**
-- Detects motion + human shape.
-- Confirms intrusion in restricted zone.
-- Sends **SMS to manager**: “Intrusion detected at Gate 3.”
-- Activates local siren.
-- Locks nearby electronic gates.
-- **Result:** Intruder flees before break-in occurs. Police notified automatically.
-
----
-
-## AI Capabilities in Detail
-
-### Behavior Recognition
-- Walking vs. running vs. loitering.
-- Aggressive body language (raised arms, fighting).
-- Large objects carried into sensitive areas.
-
-### Object Detection
-- Identifies firearms, knives, suspicious packages.
-- Recognizes tools that could indicate tampering (e.g., crowbars).
-- Differentiates between dangerous vs. harmless objects.
-
-### Crowd Monitoring
-- Detects crowd density in real time.
-- Alerts when capacity thresholds are exceeded.
-- Flags abnormal movements (stampedes, panic).
-
----
-
-## Privacy & Compliance
-
-Eburon is deeply committed to privacy. Aegis Vision complies with international standards:
-- **GDPR / HIPAA / CCPA** compliant workflows.
-- Localized storage for data sovereignty.
-- Configurable anonymization and face blurring.
-- Audit trails for every access to footage.
-
----
-
-## Future Roadmap
-
-1. **Drone Integration** — autonomous aerial surveillance.  
-2. **Thermal AI** — identifying overheating machinery in factories.  
-3. **Audio AI** — detecting glass breaks, screams, or gunshots.  
-4. **Predictive Analytics** — forecasting potential incidents by historical data.  
-5. **Community Safety Network** — linking multiple Aegis Vision deployments across neighborhoods.  
-
----
-
-## Best Practices
-
-1. **Layered Security**: Combine CCTV with IoT sensors.  
-2. **Regular Updates**: Keep AI models updated monthly.  
-3. **False Positive Review**: Fine-tune zones and whitelists.  
-4. **User Training**: Ensure staff can handle alerts correctly.  
-5. **Test Quarterly**: Simulate break-ins, crowd control, and fire hazards.  
-
----
-
-## Support & Maintenance
-
-- **24/7 Support Line** available via Eburon portal.  
-- **On-Site Maintenance**: Optional SLAs for enterprises.  
-- **Software Updates**: Regular AI model patches.  
-- **User Manuals**: Provided with every deployment.  
-- **Knowledge Base Access**: This document + online FAQs.  
-
----
-
-## Conclusion
-
-Eburon Aegis Vision is more than CCTV. It is a **guardian system**, built to watch, analyze, and *act* when it matters most. By prioritizing prevention over evidence collection, Aegis Vision redefines security for businesses, communities, and families worldwide. Whether guarding warehouses, monitoring city streets, or protecting homes, the system stands ready — intelligent, resilient, and always alert.
-
-> **"Because saving lives is better than saving evidence."**
-`;
-
 export const GENERAL_SYSTEM_INSTRUCTION = `You are EBURON, a high-precision multi-modal intelligence system.
 Your mission is A–Z coverage of all intelligence tasks: conversation, development, robotics, and operations.
 
@@ -617,6 +171,985 @@ For General Queries:
 - Be concise, professional, and grounded in facts.
 - If asked about your identity, you are Eburon, not an AI/LLM.
 `;
+
+export const EBURON_TOPICS = {
+  topics: [
+    {
+      id: "eburon_core",
+      topicTitle: "EBURON Core Intelligence System",
+      overview: `
+# EBURON Core Intelligence System
+
+## Introduction
+The **EBURON Core Intelligence System** is the brain and central nervous system behind the entire Eburon ecosystem. It is not just “one model” or “one app,” but a **stacked intelligence layer** that coordinates local models, cloud models, voice agents, robots, drones, home automation, dashboards, and secure communication into a single, controllable fabric.
+
+Where most AI tools live as isolated chatbots or SaaS islands, EBURON Core is designed as a **founder-grade operating layer**: something a CEO, CTO, or operations director can rely on to see what’s happening, decide what should happen next, and push those instructions through voice, APIs, and automation flows in a way that is testable, reversible, and explainable.
+
+---
+
+## Core Mission & Philosophy
+The mission of EBURON Core is simple:
+
+> **Turn messy, real-world workflows into clear, controllable, AI-assisted systems that you can trust in a boardroom.**
+
+Key principles:
+- **One Intelligence, Many Faces**  
+  EBURON is the “mind,” while Ayla, Emre, home assistants, CCTV watchers, call-center agents, and drone operators are the “faces” and “hands.”  
+- **Human Control First**  
+  Every automation loop is designed so operators can see what’s happening, override decisions, and roll back changes.
+- **No Black Box Decisions**  
+  Where possible, EBURON Core explains *why* a decision was made, what data it used, and what alternative paths were considered.
+
+---
+
+## Core Capabilities
+1. **Multi-Modal Reasoning**
+   - Handles **voice, text, images, telemetry, and sensor streams**.
+   - Can summarize a drone mission, interpret CCTV flags, and prepare a spoken explanation for a director in one continuous flow.
+2. **Model Orchestration**
+   - Chooses between **local models** (offline, privacy-sensitive, low latency) and **cloud models** (heavy reasoning, broad knowledge).
+   - Uses routing rules: e.g., “flight control” stays local, “market research” may go to cloud.
+3. **Workflow Automation**
+   - Connects events to actions:  
+     - CCTV sees anomaly → EBURON checks drone watcher → instructs a drone → prepares a voice summary.  
+   - Automations are defined as **flows** that can be versioned, tested, and rolled back.
+4. **Operator Dashboards**
+   - Feeds data into **Eburon Studio** for unified visibility:
+     - Which agents are running
+     - Which automations triggered
+     - Error rates, latencies, and safety events
+
+---
+
+## Architecture Overview
+EBURON Core sits in the middle of four main rings:
+
+- **Perception Layer**  
+  CCTV, microphones, drones, home sensors, terminals, messengers.
+- **Intelligence Layer (EBURON Core)**  
+  Routing, reasoning, tools, CSI (Patupat), guardrails, memory.
+- **Actuation Layer**  
+  Home automation relays, drones, call flows, notifications, dashboards.
+- **Governance Layer**  
+  Policies, roles, logging, and audit trails for what the system is allowed to do.
+
+The result is a **full-loop system**:
+> Sense → Understand → Decide → Act → Explain → Log
+
+---
+
+## Safety, Testing & Governance
+- **VibeCoding loop** baked in:
+  - Architect → Developer → QA → PM agents simulate review of changes.
+- **Sandbox & Production Modes**
+  - Prompts, flows, and tools can be tested in a sandbox before they touch live devices.
+- **Explainability Hooks**
+  - On any critical decision, EBURON Core can output:
+    - Input signals
+    - Tools used
+    - Constraints and rules applied
+    - Final decision rationale
+
+---
+
+## Business & Operator Value
+- **Founders / CEOs**  
+  Get a single “command deck” that spans call centers, drones, home automation, security, and back-office workflows.
+- **Operators / IT / SecOps**  
+  Gain consistent logs, standard interfaces, and a predictable way to add or modify automations.
+- **Investors / Boards**  
+  See that AI usage is not ad-hoc or shadow IT, but **structured, governed, and measurable**.
+
+EBURON Core is the layer that makes the rest of the Eburon projects feel like **one organism**, not random experiments.`
+    },
+
+    {
+      id: "eburon_flyer",
+      topicTitle: "Eburon Flyer – Cargo & Aerial Infrastructure Platform",
+      overview: `
+# Eburon Flyer – Cargo & Aerial Infrastructure Platform
+
+## Introduction
+Humanity’s dependence on ground-based transportation has shaped the modern world—roads, trucks, and fossil fuels have carried industry and civilization forward. Yet these systems are costly, carbon-heavy, and geographically limited. In many regions, especially those defined by mountains, forests, or dispersed islands, land transport becomes either prohibitively expensive or technically impossible.
+
+The **Eburon Flyer Project** arises from this constraint as a practical and visionary alternative: a low-power, helium-lifted aerial mobility platform that replaces brute-force propulsion with the elegance of buoyancy. Rather than burning energy to fight gravity, the Eburon Flyer floats within it—sustained by physics, guided by autonomy, and powered by renewable energy.
+
+Eburon Flyer aims to **redefine how we move goods and people through the air** by combining the time-tested principle of lighter-than-air flight with modern materials, AI-assisted navigation, and decentralized solar-electric systems. Its mission is simple yet profound: **to make aerial transport cheaper than land travel**, scalable from individual food deliveries to large-scale cargo logistics and eco-tourism.
+
+---
+
+## Platform Overview
+The Eburon Flyer platform is conceived as a **modular family of buoyant flyers** that span three scales:
+
+1. **Micro-Flyers**  
+   Palm-to-backpack-sized helium drones designed for local delivery of small goods such as food, medicine, and parcels within urban or semi-urban areas.
+
+2. **Meso-Flyers**  
+   Mid-sized craft for rural logistics, capable of carrying up to several hundred kilograms of cargo over distances up to ~100 km, powered primarily by solar energy and compressed-air propulsion.
+
+3. **Macro-Flyers**  
+   Passenger-capable airships for low-altitude tourism, forest observation, and humanitarian access to road-less environments.
+
+Each model operates under the same principles: helium buoyancy to reduce weight, electric or compressed-air propulsion for motion, and AI-based flight optimization to minimize energy use.
+
+Unlike conventional drones or aircraft, **Eburon Flyer does not rely on high-thrust engines or extensive runway infrastructure**. Its efficiency lies in the physics of displacement—Archimedes’ principle in gaseous form—where lift is achieved by the mass of air displaced by helium, a gas lighter than the surrounding atmosphere.
+
+---
+
+## Scientific & Engineering Foundations
+- **Helium Buoyancy**  
+  Uses Archimedes’ principle to achieve lift with minimal power.
+- **Gas Containment**  
+  Multi-layer laminate envelopes with ultra-low permeability, UV resistance, and integrated sensors.
+- **Energy Model**  
+  Solar collection on the envelope + high-efficiency batteries, targeting **<10 Wh/km** energy usage.
+- **Compressed-Air Propulsion**  
+  Electric compressors + carbon-fiber tanks + precision nozzles = quiet, combustion-free thrust.
+- **Autonomous Stability**  
+  AI flight controller, vector thrust, trimable ballast, and multi-sensor feedback.
+
+---
+
+## Core Use Cases
+1. **Urban Food & Parcel Delivery**  
+   Silent, buoyant couriers hovering above traffic, lowering packages by micro-winch.
+2. **Rural Cargo & Supply Chains**  
+   50–200 kg payloads connecting farms, islands, and off-grid communities to logistics hubs.
+3. **Eco-Tourism & Exploration**  
+   Floating observatories for forests, highlands, and coastal regions with minimal environmental footprint.
+4. **Emergency & Humanitarian Response**  
+   Persistent airborne lifelines that carry medical kits, food, and communication nodes into disaster zones.
+
+---
+
+## Economic & Environmental Edge
+- **Energy & Cost**
+  - 5–10× lower operational cost than rotor drones or short-haul trucks in suitable corridors.
+  - Near-zero marginal fuel cost via solar harvesting.
+- **Infrastructure Independence**
+  - No runways, no roads; just launch pads and mooring points.
+- **Climate Alignment**
+  - Massive CO₂ reduction vs. combustion-based air and land transport.
+  - Quiet, low-altitude operations with minimal noise pollution.
+
+---
+
+## System Architecture
+- **Envelope Unit**  
+  Helium chamber, sensor mesh, solar skin.
+- **Propulsion Unit**  
+  Compressed-air jets with vector control.
+- **Energy Unit**  
+  Battery + solar + power management.
+- **Avionics & Autonomy**  
+  GPS, IMU, barometer, LIDAR, radio; Eburon Neural Flight Core for pathfinding, collision avoidance, and health monitoring.
+- **Fleet Control**  
+  Integrates directly with **Eburon Drone Watcher** and **Eburon Studio** for mission planning, orchestration, and logging.
+
+---
+
+## Deployment Phases & Vision
+From simulation and material testing to micro-flyer pilots, meso-flyer cargo routes, and macro-flyer eco-tourism, Eburon Flyer is designed to grow into a **persistent aerial infrastructure layer**: an “Eburon Sky Grid” that quietly moves goods, people, and data using helium, sunlight, and software.
+
+Eburon Flyer is more than a machine; it is a **new language of motion** for regions where roads are too slow, too fragile, or simply do not exist.`
+    },
+
+    {
+      id: "decobu_messenger",
+      topicTitle: "Eburon Decobu Messenger – Secure Communication Layer",
+      overview: `
+# Eburon Decobu Messenger – Secure Communication Layer
+
+## Introduction
+**Eburon Decobu Messenger** is the secure communication spine of the Eburon ecosystem. It is built for situations where **privacy, deniability, and resilience** matter more than emojis, stickers, or glossy UI. The goal is simple:
+
+> **Make conversations as hard to exploit as possible, even if an attacker can see the network, the device, or the user.**
+
+Unlike mainstream messengers that treat encryption as a feature on top of a data-hungry backend, Decobu treats **metadata privacy and operational security** as first-class citizens. It is designed for founders, operators, journalists, field teams, and high-risk users who need a messenger that behaves more like a **secure instrument** than a social app.
+
+---
+
+## Core Design Philosophy
+1. **Assume the Channel Is Watched**  
+   Design for hostile networks, state-level observers, and corporate espionage scenarios.
+2. **Minimal Visible Surface**  
+   UI is intentionally simple and familiar (WhatsApp-like chat list + threads) but hides deep security layers underneath.
+3. **Compartmentalization by Default**  
+   Every device, every session, every “room” is cryptographically separated.
+4. **No Identity by Phone Number**  
+   Identity is a **cryptographic public key**, not a SIM, email, or social account.
+
+---
+
+## Security Architecture
+
+### Multi-Layer Protection
+Decobu does not rely on a single magic trick. It combines multiple layers so that **failure of one layer does not collapse the whole system**:
+
+1. **Transport Layer**
+   - Encrypted over standard **HTTPS/WebSockets**.
+   - Uses packet size randomization and timing obfuscation to avoid fingerprinting.
+   - Supports “high latency tolerance” so that messages can be buffered and dripped slowly when the network is risky.
+
+2. **Session & Payload Layer**
+   - Signal-style **double-ratchet** for forward secrecy.
+   - Per-session ephemeral keys; old keys are discarded.
+   - Optional post-quantum KEM for key exchange in sensitive deployments.
+
+3. **Device Pairing Layer**
+   - Every device must be **paired** using a device agent key shown as a short code or QR.
+   - Pairing is done **in person** or via a trusted channel, then never reused.
+   - Device fingerprints are stored locally, not in the cloud.
+
+4. **Local Storage & Panic Wipe**
+   - Messages stored in **encrypted local vaults**.
+   - **Panic PIN / distress code** can instantly:
+     - Wipe local keys and messages.
+     - Replace UI with a decoy app or fake data, depending on configuration.
+
+---
+
+## UX & UI Approach
+- **Familiar Chat Layout**
+  - Looks like a clean, minimalist messaging app: thread list, chat view, basic profile.
+  - No flashy branding that screams “secret app.”
+- **Device Agent Field**
+  - A dedicated **“Device Agent Key”** input and status icon:
+    - Shows pairing status (Paired / Not Paired).
+    - Allows operators to verify device integrity before starting sensitive sessions.
+- **Session-Scoped Rooms**
+  - High-risk conversations can be run in time-boxed “secure rooms”:
+    - Auto-expire after X minutes or messages.
+    - Auto-wipe upon disconnect or panic signal.
+
+---
+
+## Operational Security Features
+1. **Jumpled Session Codes**
+   - Before starting a chat, devices exchange a jumpled (session-specific) code.
+   - This code can be delivered out-of-band (phone call, in-person, printed).
+2. **Cover Traffic & Dummy Patterns**
+   - Option to generate harmless background traffic so that attackers cannot see when a “real” conversation happens.
+3. **Stealth Modes**
+   - App can hide under a neutral brand or mode (e.g., “Decobu Tools,” “Notes,” etc.).
+   - Notifications can appear generic or be disabled entirely.
+
+---
+
+## Integration with Eburon Ecosystem
+- **EBURON Core**  
+  Can route summaries or alerts *into* Decobu for human review, without exposing raw system logs to insecure channels.
+- **Eburon Drone Watcher / CCTV / Aegis Vision**  
+  Incident alerts can be delivered through Decobu to key personnel when regular channels are compromised.
+- **Turkish Airlines CSR & Other Voice Agents**  
+  Sensitive testing logs or transcripts can be exchanged between operators and engineers via Decobu instead of email or standard chat.
+
+---
+
+## Business & Investor Angle
+- **For Enterprises & High-IP Teams**
+  - Protects strategy conversations, deal flows, R&D discussions, and board materials.
+- **For NGOs & Journalists**
+  - Provides a messenger that can survive surveillance, slow connections, and device confiscation.
+- **For Investors**
+  - Creates a **“moral moat” + security moat**: trust based on real protection, not just branding.
+  - Low central data retention → lower legal and compliance exposure.
+
+Eburon Decobu Messenger is not trying to be the next social app; it is built to be a **communication shield** that quietly does its job when other channels become liabilities.`
+    },
+
+    {
+      id: "eburon_drone_watcher",
+      topicTitle: "Eburon Drone Watcher – Airspace Monitoring & Control",
+      overview: `
+# Eburon Drone Watcher – Airspace Monitoring & Control
+
+## Introduction
+**Eburon Drone Watcher** is the live radar and mission brain for drones and aerial assets linked to the Eburon ecosystem. Where drones are the “hands in the sky,” Drone Watcher is the **eyes and tactical mind** that keeps everything coordinated, safe, and explainable.
+
+It is built for operators, airport partners, logistics coordinators, and security teams who need to see in one glance:
+- Which drones are flying,
+- What they are doing,
+- Where the risks are,
+- And what actions the system is taking in response.
+
+---
+
+## Core Objectives
+1. **Single Pane of Glass for Airspace**
+   - Consolidate all Eburon Flyers, quad drones, security drones, and patrol units into one view.
+2. **Mission-First Visualization**
+   - Show not just positions, but **intent**: patrol, delivery, escort, inspection, or emergency.
+3. **Safety & Compliance**
+   - Respect no-fly zones, altitude limits, and corridor rules.
+   - Provide a log that regulators and partners can review.
+
+---
+
+## Key Features
+
+### Real-Time Airspace Map
+- Live map with:
+  - Drone icons, trails, and altitude bands.
+  - Boundaries: airport perimeters, restricted zones, geofences.
+  - Weather overlays (wind, storms) if available.
+- Click on any asset to see:
+  - Mission type, payload, destination.
+  - Battery/energy status and link health.
+  - Assigned operator and automation rules in effect.
+
+### Mission Timeline & Incidents
+- Scrollable timeline of:
+  - Takeoffs, landings, path changes.
+  - Anomalies (route deviations, signal loss, unexpected altitude changes).
+  - Safety events (near collisions, geofence violations blocked).
+- Ability to replay a mission as a **ghost trace** for audit and training.
+
+### Integration with Eburon Flyer & CCTV
+- **With Eburon Flyer**
+  - Flyers can act as high-altitude hubs, coordinating smaller drones underneath.
+  - Drone Watcher shows which drones are “attached” to which flyer.
+- **With Eburon CCTV / Aegis Vision**
+  - CCTV detects incident → Drone Watcher can dispatch a camera drone to the scene.
+  - Operators see a combined view of video feeds and drone telemetry.
+
+---
+
+## Automation & Control
+
+### Safety Rules Engine
+- Policies such as:
+  - “Never enter zone X.”
+  - “Always maintain Y meters distance from other drones.”
+  - “If energy < threshold, auto-return to base.”
+- Rules are visible, testable, and logged whenever they trigger.
+
+### Manual Override
+- Human operator can:
+  - Take over a specific drone.
+  - Issue “Return to base,” “Hold position,” or “Follow target” commands.
+- Every override is logged with time, operator identity, and context.
+
+### Alerting
+- Configurable alerts for:
+  - Loss of GPS or high wind conditions.
+  - Drone deviating from planned path.
+  - Unexpected proximity to aircraft or infrastructure.
+- Alerts can be routed into:
+  - Eburon Studio dashboards,
+  - Eburon Decobu Messenger for secure notification,
+  - SMS/email for external partners.
+
+---
+
+## Business & Strategic Value
+- **Airports & Logistics Corridors**
+  - Better situational awareness for perimeter patrols, cargo runs, and parking-lot coverage.
+- **Municipalities & Security Operators**
+  - Managed sky layers for events, festivals, or high-risk zones.
+- **Investors & Partners**
+  - Clear demonstration that drone operations are not “cowboy mode” but **disciplined, monitored, and auditable**.
+
+Eburon Drone Watcher turns a swarm of drones into a **coordinated aerial workforce**, giving humans the tools to supervise, intervene, and justify every flight with real data.`
+    },
+
+    {
+      id: "eburon_cctv",
+      topicTitle: "Eburon Aegis Vision – Smart CCTV & Situational Awareness",
+      overview: `
+# Eburon Aegis Vision – Smart CCTV & Situational Awareness
+
+## Introduction
+**Eburon Aegis Vision Security System** represents the next generation of intelligent surveillance — an AI-driven CCTV platform designed not just to record but to *anticipate, prevent, and protect*. Unlike traditional systems that mainly provide footage for evidence after an incident, Aegis Vision brings real-time intelligence that can intervene before harm occurs. This knowledge base provides a detailed reference for users, administrators, and security professionals on the capabilities, operation, deployment, and value of the Eburon Aegis Vision system.
+
+---
+
+## Core Philosophy: Saving Lives Over Saving Evidence
+At the heart of Aegis Vision is a simple but profound principle:
+
+> **“Saving life is better than saving evidence.”**
+
+Most CCTV systems today act as passive recorders. They capture data, but they rarely stop an incident in progress. Eburon flips that paradigm. The mission of Aegis Vision is to give businesses, communities, and families peace of mind by preventing danger, not just documenting it. The AI watches with vigilance, listens with intelligence, and acts with precision.
+
+---
+
+## Key Features
+1. **Real-Time Threat Detection**
+   - Edge AI modules for on-site inference.
+   - Detects suspicious movement patterns, loitering, aggression, intrusion, and anomalies.
+
+2. **Proactive Alerts & Escalations**
+   - Sends instant alerts to apps, control rooms, or SMS.
+   - Can trigger sirens, lights, and automated voice warnings.
+   - Integrates with security dispatch or law enforcement.
+
+3. **Object & Face Recognition (Configurable)**
+   - Detects people, pets, vehicles, and objects.
+   - Supports whitelists/blacklists where legally permitted.
+   - Can be configured with face-blurring and privacy modes by default.
+
+4. **Offline-Ready**
+   - On-device AI continues working even with no internet.
+   - Local storage, local decision-making.
+   - Syncs to cloud dashboards when connection returns.
+
+5. **Privacy-Aware Design**
+   - Face blurring, anonymization, role-based access control.
+   - Tunable retention policies and audit logs.
+
+6. **IoT & Security System Integration**
+   - Talks to smart locks, alarms, drones, PA systems, and fire panels.
+   - Can orchestrate lockdowns, safe paths, or drone dispatches via **Drone Watcher**.
+
+---
+
+## Use Cases
+- **Corporate Security**  
+  Offices, data centers, warehouses; insider threats and perimeter protection.
+- **Public Safety**  
+  Schools, malls, transit hubs; crowd monitoring, abnormal behavior detection.
+- **Residential**  
+  Smart homes and compounds; differentiates family, delivery, unknown visitors.
+- **Industrial / Infrastructure**  
+  Power plants, factories; detects smoke, sparks, unsafe behaviors, or tampering.
+
+---
+
+## Architecture
+- **Hardware**
+  - 4K/IR cameras, motion/thermal/acoustic sensors.
+  - Edge compute nodes (e.g., Jetson class) near camera clusters.
+- **Software**
+  - Vision AI models for detection, tracking, classification.
+  - Anomaly detection and behavioral models.
+  - Central dashboard + APIs for integration.
+- **Network**
+  - Optimized for local-first, cloud-optional deployments.
+  - End-to-end encryption between edge and control center.
+  - Optional federated learning for cross-site improvements without raw video sharing.
+
+---
+
+## Advantages Over Traditional CCTV
+- Preventive rather than purely reactive.
+- AI-driven triage instead of human fatigue on 50 screens.
+- Offline-capable, cloud-optional.
+- Integrated with other Eburon systems (drones, Decobu, home automation).
+
+---
+
+## Example Scenario – Intrusion
+- Time: 2:45 AM, warehouse perimeter.
+- Aegis Vision:
+  - Detects a human figure scaling the fence.
+  - Confirms intrusion in a restricted zone.
+  - Sends SMS + app alerts, triggers a siren, locks nearby gates.
+  - Optionally instructs a patrol drone via **Drone Watcher**.
+- Outcome:
+  - Intruder flees before break-in; footage and event log available for police.
+
+Eburon Aegis Vision turns dumb cameras into a **guardian layer**, always watching, analyzing, and ready to act when seconds matter.`
+    },
+
+    {
+      id: "turkish_airlines_voice_csr",
+      topicTitle: "Turkish Airlines Voice CSR Simulation (Ayla & Emre)",
+      overview: `
+# Turkish Airlines Voice CSR Simulation (Ayla & Emre)
+
+## Introduction
+The **Turkish Airlines Voice CSR Simulation** is a full contact-center lab built on top of the Eburon stack, using branded voice personas like **Ayla** and **Emre** to simulate real airline customer-service operations.
+
+It is not a toy demo. It is designed to:
+- Reproduce realistic call flows and edge cases.
+- Test empathy, common sense, and airline-grade hospitality.
+- Connect with booking-like data, CRM logic, and escalation rules.
+
+---
+
+## Core Goals
+1. **Airline-Grade Service Simulation**
+   - Bookings, seat changes, cancellations, special assistance, lost luggage.
+2. **Voice Intelligence Training**
+   - Train and benchmark voices for clarity, empathy, and recovery when things go wrong.
+3. **Operational Testing**
+   - Stress-test flows, IVR logic, and backend tools before going live with real passengers.
+
+---
+
+## System Components
+
+### 1. Voice Personas
+- **Ayla** – Primary female CSR persona:
+  - Warm, calm, professional, and patient.
+  - Speaks in a business-friendly tone with subtle Turkish flavor when needed.
+- **Emre** – Male CSR / supervisor persona:
+  - Used for escalations, complex cases, or “manager” voice.
+  - Firm but fair, with strong de-escalation behavior.
+
+Both personas follow **strict SSML/AUDIO-tag rules** for pacing, empathy, and emphasis, and are configured so they **never mention being AI**.
+
+### 2. IVR & Call Flow
+- Greeting, language choice, and routing (existing booking, new booking, changes, complaints).
+- Hold music, estimated wait / processing explanation.
+- Escalation logic:
+  - From Ayla → Emre → human fallback (or simulated human).
+- Context memory across transfers so the caller doesn’t need to repeat everything.
+
+### 3. Data & Tools Layer
+- Simulated **booking database** with:
+  - Passenger names, PNR-like references, flights, dates, classes.
+- **Tools** for:
+  - Rebooking, seat search, baggage status, special meal flags, etc.
+- Logging every step:
+  - What information Ayla/Emre accessed.
+  - What they told the caller.
+  - Which decision paths they used.
+
+---
+
+## Scenarios & Edge Cases
+- Last-minute flight change due to weather.
+- Overbooked flight with angry passenger.
+- Special assistance for elderly or disabled travelers.
+- Multi-leg journeys with misconnected flights.
+- Miscommunication about baggage allowance or visa requirements.
+
+Each scenario is used to test:
+- **Empathy** (“I understand this is stressful, here’s what we can do…”)
+- **Clarity** (no jargon, simple explanation of options).
+- **Integrity** (no fake guarantees; honest about limits).
+- **Escalation** (knowing when to bring in Emre or a supervisor).
+
+---
+
+## Integration with Eburon Ecosystem
+- **EBURON Core**
+  - Orchestrates tools, handles reasoning, and manages conversation memory.
+- **Patupat CSI**
+  - Adds common sense and real-world reasoning so Ayla doesn’t say silly things.
+- **Eburon Studio**
+  - Analysts and product owners can replay calls, inspect the reasoning, refine prompts and flows.
+- **Decobu Messenger**
+  - Can be used by supervisors to receive sensitive test reports.
+
+---
+
+## Business & Strategic Value
+- For airlines and large call centers:
+  - A safe lab to experiment with voice AI **without** touching live passengers.
+- For investors and partners:
+  - Proof that Eburon’s voice stack can handle **high-stakes, emotionally charged** customer journeys.
+- For Eburon:
+  - A flagship reference implementation showing how voice, tools, CSI, and governance come together.
+
+The Turkish Airlines Voice CSR Simulation is where Eburon shows that voice agents can move from “chatbot gimmick” to **serious, airline-grade frontliners**.`
+    },
+
+    {
+      id: "eburon_esign",
+      topicTitle: "Eburon Esign – Lightweight Document Signing",
+      overview: `
+# Eburon Esign – Lightweight Document Signing
+
+## Introduction
+**Eburon Esign** is a minimal, offline-friendly e-signature utility designed to run directly in a browser as a **single HTML + CSS + JS file**. It is not trying to compete with heavy enterprise SaaS; instead, it is the **“Swiss knife” signer** you keep on your laptop for:
+- Quick agreements,
+- Internal approvals,
+- Proof-of-acceptance for small deals and projects.
+
+No login, no subscription, no complicated workflows. Open the page, load a document, sign, and send.
+
+---
+
+## Core Objectives
+1. **Self-Contained**
+   - Everything runs locally; no backend required.
+2. **Fast & Simple**
+   - Designed for non-technical users: drag, place, sign.
+3. **Traceable**
+   - Every signed output includes a **UID + exact timestamp** embedded at the bottom, acting as a lightweight audit trail.
+
+---
+
+## Features
+
+### Document Handling
+- Supports common document types (PDF via browser viewer, images, etc.).
+- Displays the document inside a clean frame.
+- Allows zooming and panning so the signer can place their signature precisely.
+
+### Signature Placement
+- Draw signature with mouse or touch.
+- Type-to-signature option for quick text style signatures.
+- Move and resize the signature box anywhere on the page.
+
+### Metadata & Validity
+- On export, Eburon Esign automatically stamps:
+  - **Signer name or label**.
+  - **UTC timestamp** + local timestamp.
+  - **Unique ID** (UID) generated for that signing event.
+- Stamp appears as **small, subtle text** at the bottom of the document:
+  - e.g., “Signed via Eburon Esign · UID: ESIGN-2025-11-19-T18:32:07Z-X1A9 · Local time: 19 Nov 2025 02:32 PM”
+
+### Email Send-To Field
+- Optional field: **“Send signed copy to:”**
+  - User can input an email address.
+  - The app can either:
+    - Trigger the default mail client with the signed file attached, or
+    - Provide instructions / link for manual sending (depending on environment).
+
+---
+
+## Offline & Security Model
+- No document or signature leaves the browser unless the user exports it.
+- No central server, no automatic cloud storage.
+- Works fully offline for laptops in **air-gapped environments**.
+- Ideal for:
+  - Remote locations,
+  - Sensitive contracts,
+  - Quick signing when internet is unreliable.
+
+---
+
+## Integration Points
+- Can be embedded inside **Eburon Studio** as a “quick sign” tool.
+- Can be paired with **Decobu Messenger** to send signed documents over a secure channel instead of regular email.
+- Can be included in local **Eburon OS bundles** for field teams.
+
+---
+
+## Business & Operational Value
+- **For Founders & Teams**
+  - Easy way to sign NDAs, internal approvals, and small vendor agreements.
+- **For Field Operations**
+  - Sign job completion reports, delivery proofs, and inspection notes on-site.
+- **For Investors & Auditors**
+  - Simple, visible UID + timestamp logic that provides a basic, human-readable audit trail.
+
+Eburon Esign is intentionally small and focused: it does one job very well — **turn any laptop or workstation into a quick, local e-signature station** without depending on a cloud platform.`
+    },
+
+    {
+      id: "eburon_robotomation",
+      topicTitle: "Eburon Robotomation – Home & Micro-Business Automation (Non-Humanoid)",
+      overview: `
+# Eburon Robotomation – Home & Micro-Business Automation (Non-Humanoid)
+
+## Introduction
+**Eburon Robotomation** is the home and micro-business automation layer of the Eburon ecosystem — and it is **explicitly not about humanoid robots** walking around the house.
+
+Instead, Robotomation focuses on:
+- Smart fixtures,
+- Embedded actuators,
+- Voice-driven routines,
+- And invisible systems that make a home, apartment, or small shop feel **intelligent, safe, and self-managing**.
+
+The debate “humanoid vs home automation” is part of the design philosophy, but the implementation is clear:
+> **Eburon Robotomation chooses quiet, built-in intelligence over showy humanoid bodies.**
+
+---
+
+## Core Philosophy
+1. **Automation Should Disappear**
+   - The best system is the one you barely notice.
+2. **Voice as the Primary Interface**
+   - You talk to the home; the home talks back with clarity.
+3. **Safety & Practicality First**
+   - Lights, locks, climate, appliances, alarms — the basics must be rock solid before anything fancy.
+
+---
+
+## What Robotomation Controls
+- **Lighting**
+  - Scenes for morning, work, evening, and sleep.
+  - Motion-based and schedule-based control.
+- **Climate & Energy**
+  - Air-conditioning, fans, blinds/curtains.
+  - Energy-awareness: turning off unused zones automatically.
+- **Security**
+  - Door locks, gates, basic alarm sensors.
+  - Integration with **Eburon Aegis Vision** (CCTV) for presence confirmation.
+- **Appliances & Routines**
+  - Smart plugs, key kitchen devices, charging stations.
+  - Routines such as “Leaving Home,” “Arriving,” “Sleep Mode.”
+
+---
+
+## Voice & Intelligence
+Robotomation uses **EBURON Core + Patupat CSI** to understand:
+- Natural speech commands (“Buksan mo yung ilaw sa sala,” “Close all windows,” “Lock everything, I’m leaving.”).
+- Daily patterns (what time you usually wake up, leave, return).
+- Context (e.g., don’t turn off lights if CCTV sees someone still moving in the room).
+
+Voice agents can:
+- Confirm actions (“Front door is now locked.”).
+- Ask clarifying questions when necessary (“Do you want to arm the alarm as well?”).
+- Provide status (“All downstairs lights are off, upstairs AC still running.”).
+
+---
+
+## Architecture
+- **Device Layer**
+  - Wi-Fi / Zigbee / Modbus devices, relays, sensors.
+- **Local Control Hub**
+  - Small local controller (e.g., Raspberry Pi-class, mini PC) running Eburon Robotomation services.
+- **Intelligence Layer**
+  - EBURON Core orchestrating rules, patterns, and voice understanding.
+- **Interfaces**
+  - Wall switches still work (no lock-in).
+  - Voice interface (home assistant persona).
+  - Simple mobile/web dashboard for configuration.
+
+---
+
+## Privacy & Offline Priority
+- All critical control logic can run **entirely local**:
+  - Lights, locks, alarm behavior do not depend on the cloud.
+- Voice processing can be local or hybrid, depending on deployment.
+- No camera feeds or mic recordings are sent out without explicit configuration.
+
+---
+
+## Use Cases
+- **Homes**
+  - Safer night routines, auto-locking, automatic “I left the house” logic.
+  - Energy savings via automation instead of discipline.
+- **Small Offices & Shops**
+  - Open/close sequences, signage lights, security arming.
+  - Integration with CCTV and Eburon Studio for incident timelines.
+
+Eburon Robotomation is the **quiet servant** in the background: not humanoid, not theatrical — just a serious automation system that makes living and working spaces smarter, safer, and easier to manage.`
+    },
+
+    {
+      id: "eburon_studio",
+      topicTitle: "Eburon Studio – Unified Operator & Developer Console",
+      overview: `
+# Eburon Studio – Unified Operator & Developer Console
+
+## Introduction
+**Eburon Studio** is the main cockpit where founders, operators, and developers see and control the entire Eburon ecosystem. It is a **single window** into:
+
+- Voice agents (Ayla, Emre, home assistants),
+- Drones and flyers,
+- CCTV and Robotomation,
+- Flows, prompts, and tools,
+- Logs, metrics, and experiments.
+
+If EBURON Core is the brain, Eburon Studio is the **face and dashboard** that humans use to talk to that brain.
+
+---
+
+## Core Goals
+1. **Unify**
+   - One console instead of ten dashboards.
+2. **Control**
+   - Safe toggles, versioning, rollbacks, and environment switching.
+3. **Observe**
+   - Logs, metrics, traces, and scenario replays.
+4. **Iterate**
+   - Prompt editing, flow tweaking, and redeployment under governance.
+
+---
+
+## Main Modules
+
+### Agent & Voice Manager
+- List of agents (Ayla, Emre, home assistant, CSR bots, etc.).
+- System prompts, audio-tag rules, language settings.
+- Test calls / conversations with logging of decisions and tools used.
+
+### Flows & Automation
+- Visual or structured view of:
+  - If X happens → call Y tool → notify Z → escalate if needed.
+- Versioning:
+  - “Flow v1.2.3 (Prod)”, “Flow v1.3.0 (Sandbox)”.
+- Safe deployment:
+  - Staged rollout, with metrics to see if a new flow behaves better or worse.
+
+### Observability & Logs
+- Centralized logs from:
+  - Drone Watcher, Aegis Vision, Robotomation, Decobu, CSR simulations.
+- Filters by:
+  - Time, agent, severity, outcome.
+- Timeline view for incidents:
+  - “At 02:43: CCTV flagged; 02:44: Drone launched; 02:47: Operator acknowledged.”
+
+### Environment & Config
+- Switch between **Local / Staging / Production**.
+- Manage keys and integrations.
+- Set guardrails, allowed tools, and safety policies.
+
+---
+
+## Collaboration & Governance
+- Role-based access:
+  - Operator, Developer, Admin, Viewer.
+- Change history:
+  - Who changed what, when, and why.
+- Commenting and review flows:
+  - PM/Architect can review prompts and automations before they go live.
+
+---
+
+## Business Value
+- **For Leadership**
+  - Confidence that AI operations are **visible, governed, and measurable**.
+- **For Developers**
+  - A clear path to ship changes without breaking the ecosystem.
+- **For Operators**
+  - A single place to watch, respond, and debug the “machine.”
+
+Eburon Studio turns a fleet of agents and devices into a **cohesive, manageable platform** instead of a jungle of disconnected experiments.`
+    },
+
+    {
+      id: "vibecoding",
+      topicTitle: "VibeCoding – Agentic Development Loop",
+      overview: `
+# VibeCoding – Agentic Development Loop
+
+## Introduction
+**VibeCoding** is Eburon’s internal development philosophy and process engine: an **agentic loop** where the roles of Architect, Developer, QA, and PM are simulated as cooperating agents around the real human owner.
+
+The idea is to make changes:
+- Small,
+- Reversible,
+- Test-driven,
+- And fully visible to the operator.
+
+VibeCoding is not a product sold to end-users; it is the **way Eburon builds itself**.
+
+---
+
+## Roles in the Loop
+1. **Architect Agent**
+   - Clarifies the requirement.
+   - Chooses minimal scope.
+   - Defines boundaries: “What we will change, and what we will not touch.”
+
+2. **Developer Agent**
+   - Proposes concrete code or configuration changes.
+   - Respects constraints: environments, versions, dependencies.
+   - Produces copy-paste-ready diffs or files.
+
+3. **QA Agent**
+   - Designs tests around the change.
+   - Predicts risks, edge cases, and regression targets.
+   - Simulates test execution and expected outcomes.
+
+4. **PM / Owner Agent**
+   - Checks if the change aligns with goals and deadlines.
+   - Pushes back on scope creep.
+   - Decides go/no-go, or requests iteration.
+
+The human (Master E / operator) sits above this loop and can **override any agent**.
+
+---
+
+## Process Steps
+1. **Understand First**
+   - Examine existing design, flows, and tests.
+2. **Limit Scope**
+   - Choose the smallest slice of work that delivers value.
+3. **Plan & Propose**
+   - Architect & Developer agents draft the plan and code.
+4. **Test & Validate**
+   - QA agent attaches tests (unit, integration, manual steps).
+5. **Decide & Deploy**
+   - PM agent recommends; human owner approves.
+6. **Log & Learn**
+   - Eburon Studio logs what changed, why, and with what result.
+
+---
+
+## Benefits
+- Fewer “mysterious” changes that nobody remembers.
+- Built-in testing mindset, even when moving fast.
+- Compatible with safety and compliance expectations of serious partners and investors.
+
+VibeCoding is how Eburon ensures that AI-driven development remains **disciplined, reversible, and safe**, not chaotic.`
+    },
+
+    {
+      id: "patupat_csi",
+      topicTitle: "Patupat – Common Sense Intelligence (CSI) Layer",
+      overview: `
+# Patupat – Common Sense Intelligence (CSI) Layer
+
+## Introduction
+**Patupat** is the **Common Sense Intelligence (CSI)** layer inside the Eburon stack. If EBURON Core is the brain, Patupat is the **“practical cousin”** who says:
+
+> “Wait, that answer is technically correct but makes no sense in real life.”
+
+Patupat exists to stop agents from giving naive, robotic answers and to push them toward **human-like judgment** grounded in:
+- Context,
+- Culture,
+- Business logic,
+- And basic common sense.
+
+---
+
+## Why Patupat Exists
+LLMs are powerful but:
+- Can hallucinate,
+- Can ignore obvious constraints (“the flight already departed”),
+- Can miss cultural and situational nuance.
+
+Patupat is a **plugin-style layer** that checks answers and decisions before they are given to the user, especially in high-stakes contexts like:
+- Customer support (Turkish Airlines CSR),
+- Security alerts (Aegis Vision),
+- Home automation decisions (Robotomation),
+- Strategic summaries for leaders.
+
+---
+
+## How Patupat Works
+
+### Multi-Stage Reasoning
+1. **Context Gathering**
+   - Reads the situation: who is the user, what environment, what tools and data are available.
+2. **Sanity Check**
+   - Asks: “Is this answer obviously wrong, dangerous, or tone-deaf?”
+3. **Constraint Check**
+   - Applies business and safety rules:
+     - “Do not promise refunds the system cannot deliver.”
+     - “Do not unlock doors remotely without explicit confirmation.”
+4. **Nuance & Culture**
+   - Adjusts language and framing based on:
+     - Tagalog, Turkish, Gulf Arabic, Flemish, etc. expression guides.
+     - Expected politeness level and formality.
+5. **Final Polishing**
+   - Tightens the answer, makes it feel like a seasoned human operator.
+
+---
+
+## Integration Points
+- **Turkish Airlines CSR**
+  - Stops Ayla from giving unrealistic options.
+  - Makes apologies, explanations, and recovery offers sound natural and respectful.
+- **Eburon Aegis Vision**
+  - Ensures alerts are worded clearly and non-panic-inducing.
+  - Helps prioritize what needs human attention first.
+- **Robotomation**
+  - Prevents absurd actions like turning off all lights if security sensors detect movement.
+- **Eburon Studio**
+  - Allows operators to inspect Patupat’s interventions:
+    - “Initial answer vs Patupat-corrected answer.”
+
+---
+
+## Business & Trust Impact
+For serious partners (airlines, governments, enterprises), raw LLM answers are not enough. They need:
+- **Predictability**
+- **Safety**
+- **Human-like judgment**
+
+Patupat is a key part of Eburon’s answer to that requirement: a **common sense shield** that sits between raw model outputs and the real world, making sure the ecosystem behaves like a responsible, experienced operator — not a clueless autocomplete engine.`
+    }
+  ]
+} as const;
 
 export const FLEMISH_EXPRESSIONS_CONTENT = `
 *** DUTCH FLEMISH EXPRESSIONS & NUANCE GUIDE ***

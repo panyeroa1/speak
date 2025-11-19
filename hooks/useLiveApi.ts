@@ -2,9 +2,7 @@ import { useState, useRef, useCallback, useEffect } from 'react';
 import { GoogleGenAI, LiveServerMessage, Modality } from '@google/genai';
 import { 
     ORUS_SYSTEM_PROMPT, 
-    DECOBU_SECURITY_CONTENT, 
-    EBURON_FLYER_CONTENT,
-    AEGIS_VISION_CONTENT,
+    EBURON_TOPICS,
     FLEMISH_EXPRESSIONS_CONTENT,
     TAGALOG_EXPRESSIONS_CONTENT,
     SINGAPORE_EXPRESSIONS_CONTENT,
@@ -22,6 +20,7 @@ import {
 } from '../constants';
 import { createPcmBlob, base64ToUint8Array, decodeAudioData, downsampleBuffer } from '../utils/audioUtils';
 import { LiveStatus } from '../types';
+import { supabase, getSessionId } from '../utils/supabaseClient';
 
 export const useLiveApi = () => {
   const [status, setStatus] = useState<LiveStatus>({
@@ -105,6 +104,11 @@ export const useLiveApi = () => {
       gainNode.gain.value = 1.0;
       volumeGainNodeRef.current = gainNode;
 
+      // STATIC WIRING: Gain -> Analyser -> Destination
+      // We do this ONCE here, not in onmessage
+      gainNode.connect(analyser);
+      analyser.connect(audioCtx.destination);
+
       // Start Visualizer Loop
       const updateVisualizer = () => {
         let vol = 0;
@@ -112,10 +116,17 @@ export const useLiveApi = () => {
         // Audio Ducking Logic
         if (volumeGainNodeRef.current) {
             // If user is speaking loudly (> 0.1), duck agent volume to 0.2
+            // Unless agent is currently silent, but we duck anyway to be safe
             const targetGain = micVolumeRef.current > 0.1 ? 0.2 : 1.0;
+            
             // Smooth transition
             const currentGain = volumeGainNodeRef.current.gain.value;
-            volumeGainNodeRef.current.gain.value = currentGain + (targetGain - currentGain) * 0.1;
+            // Simple lerp for smoothness
+            if (Math.abs(targetGain - currentGain) > 0.01) {
+                volumeGainNodeRef.current.gain.value = currentGain + (targetGain - currentGain) * 0.1;
+            } else {
+                volumeGainNodeRef.current.gain.value = targetGain;
+            }
         }
         
         if (isSpeakingRef.current && outputAnalyserRef.current) {
@@ -154,15 +165,38 @@ export const useLiveApi = () => {
       // Build System Instruction
       let systemInstruction = ORUS_SYSTEM_PROMPT;
       
-      const selectedTopic = localStorage.getItem('eburon_topic') || 'Eburon Aegis Vision';
-      let topicContent = AEGIS_VISION_CONTENT; 
+      const selectedTopicTitle = localStorage.getItem('eburon_topic') || 'Eburon Aegis Vision';
+      let topicContent = "";
 
-      if (selectedTopic === 'Decobu Messenger') {
-          topicContent = DECOBU_SECURITY_CONTENT;
-      } else if (selectedTopic === 'Eburon Flyer') {
-          topicContent = EBURON_FLYER_CONTENT;
-      } else if (selectedTopic === 'Eburon Aegis Vision') {
-          topicContent = AEGIS_VISION_CONTENT;
+      // 1. Look up in default static topics
+      const defaultTopic = EBURON_TOPICS.topics.find(t => 
+          t.topicTitle === selectedTopicTitle || 
+          t.topicTitle.includes(selectedTopicTitle)
+      );
+
+      if (defaultTopic) {
+          topicContent = defaultTopic.overview;
+      } else {
+          // 2. Look up in custom topics from Supabase
+          try {
+              const sessionId = getSessionId();
+              const { data } = await supabase
+                  .from('custom_topics')
+                  .select('overview')
+                  .eq('session_id', sessionId)
+                  .eq('title', selectedTopicTitle)
+                  .single();
+              
+              if (data) {
+                  topicContent = data.overview;
+              } else {
+                  console.warn(`Topic "${selectedTopicTitle}" not found. Using default.`);
+                  topicContent = EBURON_TOPICS.topics[0].overview; 
+              }
+          } catch (e) {
+              console.warn("Error fetching custom topic, using default fallback", e);
+              topicContent = EBURON_TOPICS.topics[0].overview; 
+          }
       }
 
       systemInstruction += "\n\n" + "CURRENT TOPIC BRIEFING:\n" + topicContent;
@@ -179,7 +213,6 @@ export const useLiveApi = () => {
       }
 
       let expressionContent = "";
-      // ... [Expression logic remains same, condensed for brevity] ...
       if (voiceStyle.includes('Flemish') || voiceStyle.includes('Dutch')) expressionContent = FLEMISH_EXPRESSIONS_CONTENT;
       else if (voiceStyle.includes('Tagalog')) expressionContent = TAGALOG_EXPRESSIONS_CONTENT;
       else if (voiceStyle.includes('Singapore') || voiceStyle.includes('Singlish')) expressionContent = SINGAPORE_EXPRESSIONS_CONTENT;
@@ -271,7 +304,7 @@ export const useLiveApi = () => {
                 } catch (e) {
                     // Ignore send errors
                 }
-              });
+              }).catch(() => {}); // Catch promise rejection
             };
 
             source.connect(processor);
@@ -302,15 +335,8 @@ export const useLiveApi = () => {
                 const source = ctx.createBufferSource();
                 source.buffer = audioBuffer;
                 
-                // Connect through the Gain Node (for ducking) before destination
+                // Connect source to the PERSISTENT Gain Node (the graph is already built)
                 source.connect(volumeGainNodeRef.current);
-                
-                if (outputAnalyserRef.current) {
-                    volumeGainNodeRef.current.connect(outputAnalyserRef.current);
-                    outputAnalyserRef.current.connect(ctx.destination);
-                } else {
-                    volumeGainNodeRef.current.connect(ctx.destination);
-                }
                 
                 const currentTime = ctx.currentTime;
                 if (nextStartTimeRef.current < currentTime) {
@@ -355,13 +381,18 @@ export const useLiveApi = () => {
             if (e instanceof Error) errorMessage = e.message;
             else if ((e as any).message) errorMessage = (e as any).message;
             
-            // Handle "Internal error encountered" specifically
-            if (errorMessage.includes("Internal error") || errorMessage.includes("internal error")) {
-                errorMessage = "API Internal Error. Retrying with fresh session...";
-                // Force a slightly longer pause for internal errors
-                setTimeout(() => {
-                    if (!isIntentionalDisconnectRef.current) attemptReconnect();
-                }, 1000);
+            // Specific handling for "Network error"
+            if (errorMessage.includes("Network error") || errorMessage.includes("network")) {
+                errorMessage = "Network connection unstable. Retrying...";
+                if (!isIntentionalDisconnectRef.current) {
+                    // Faster retry for network blips
+                    setTimeout(() => attemptReconnect(), 1000);
+                }
+            } else if (errorMessage.includes("Internal error") || errorMessage.includes("internal error")) {
+                errorMessage = "API Internal Error. Retrying...";
+                if (!isIntentionalDisconnectRef.current) {
+                    setTimeout(() => attemptReconnect(), 1000);
+                }
             } else if (!isIntentionalDisconnectRef.current) {
                 attemptReconnect();
             }

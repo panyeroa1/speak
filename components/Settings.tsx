@@ -1,20 +1,30 @@
 
 
 import React, { useState, useEffect } from 'react';
-import { Settings as SettingsIcon, ChevronDown, FileText, CheckCircle, Mic, Globe, Save, Cloud, AlertCircle, Loader2, Volume2 } from 'lucide-react';
+import { Settings as SettingsIcon, ChevronDown, FileText, CheckCircle, Mic, Globe, Save, Cloud, AlertCircle, Loader2, Volume2, Plus, X } from 'lucide-react';
 import { supabase, getSessionId } from '../utils/supabaseClient';
+import { EBURON_TOPICS } from '../constants';
+
+interface CustomTopic {
+    id: string;
+    topicTitle: string;
+    overview: string;
+}
 
 const Settings: React.FC = () => {
   const [topic, setTopic] = useState<string>('Eburon Aegis Vision');
   const [voiceStyle, setVoiceStyle] = useState<string>('Dutch Flemish expressive');
   const [language, setLanguage] = useState<string>('English');
   const [voiceName, setVoiceName] = useState<string>('Orus');
+  const [customTopics, setCustomTopics] = useState<CustomTopic[]>([]);
 
   const [isSaved, setIsSaved] = useState(false);
   const [isSyncing, setIsSyncing] = useState(false);
   const [syncError, setSyncError] = useState<string | null>(null);
 
-  const validTopics = ['Eburon Aegis Vision', 'Eburon Flyer', 'Decobu Messenger'];
+  const [showAddTopic, setShowAddTopic] = useState(false);
+  const [newTopic, setNewTopic] = useState({ title: '', tagline: '', overview: '' });
+  const [isAddingTopic, setIsAddingTopic] = useState(false);
 
   // Load initial settings from LocalStorage then try Supabase
   useEffect(() => {
@@ -23,21 +33,35 @@ const Settings: React.FC = () => {
       const localLang = localStorage.getItem('eburon_language');
       const localVoiceName = localStorage.getItem('eburon_voice_name');
 
-      // Validate and Load Topic
-      if (localTopic && validTopics.includes(localTopic)) {
-          setTopic(localTopic);
-      } else {
-          // Auto-correction for invalid or legacy topics (fixes network errors caused by missing content)
-          setTopic('Eburon Aegis Vision');
-          localStorage.setItem('eburon_topic', 'Eburon Aegis Vision');
-      }
-
+      if (localTopic) setTopic(localTopic);
       if (localVoiceStyle) setVoiceStyle(localVoiceStyle);
       if (localLang) setLanguage(localLang);
       if (localVoiceName) setVoiceName(localVoiceName);
 
       fetchSettingsFromSupabase();
+      fetchCustomTopics();
   }, []);
+
+  const fetchCustomTopics = async () => {
+    const sessionId = getSessionId();
+    try {
+        const { data, error } = await supabase
+            .from('custom_topics')
+            .select('title, overview')
+            .eq('session_id', sessionId);
+        
+        if (data && !error) {
+            const mapped = data.map(t => ({
+                id: `custom_${t.title.replace(/\s+/g, '_').toLowerCase()}`,
+                topicTitle: t.title,
+                overview: t.overview
+            }));
+            setCustomTopics(mapped);
+        }
+    } catch (e) {
+        console.warn("Failed to fetch custom topics", e);
+    }
+  };
 
   const fetchSettingsFromSupabase = async () => {
       setIsSyncing(true);
@@ -51,14 +75,8 @@ const Settings: React.FC = () => {
           
           if (data && !error) {
               if (data.topic) {
-                  if (validTopics.includes(data.topic)) {
-                      setTopic(data.topic);
-                      localStorage.setItem('eburon_topic', data.topic);
-                  } else {
-                      // Force update if DB has stale topic
-                      setTopic('Eburon Aegis Vision');
-                      localStorage.setItem('eburon_topic', 'Eburon Aegis Vision');
-                  }
+                  setTopic(data.topic);
+                  localStorage.setItem('eburon_topic', data.topic);
               }
               if (data.voice_style) {
                   setVoiceStyle(data.voice_style);
@@ -68,7 +86,6 @@ const Settings: React.FC = () => {
                   setLanguage(data.language);
                   localStorage.setItem('eburon_language', data.language);
               }
-              // Note: voice_name is currently local-only to avoid schema migrations
               window.dispatchEvent(new Event('eburon_config_updated'));
           }
       } catch (err) {
@@ -94,7 +111,6 @@ const Settings: React.FC = () => {
       // 2. Save to Supabase
       const sessionId = getSessionId();
       try {
-          // We omit voice_name from Supabase upsert to prevent errors if column doesn't exist
           const { error } = await supabase
               .from('settings')
               .upsert({ 
@@ -126,6 +142,47 @@ const Settings: React.FC = () => {
       }
   };
 
+  const handleAddTopic = async () => {
+      if(!newTopic.title.trim() || !newTopic.overview.trim()) return;
+
+      setIsAddingTopic(true);
+      const sessionId = getSessionId();
+
+      try {
+          const { error } = await supabase.from('custom_topics').insert({
+              session_id: sessionId,
+              title: newTopic.title,
+              tagline: newTopic.tagline,
+              overview: newTopic.overview,
+              created_at: new Date().toISOString()
+          });
+
+          if (error) throw error;
+
+          // Refresh custom topics list locally without full re-fetch
+          const newCustom: CustomTopic = {
+              id: `custom_${newTopic.title.replace(/\s+/g, '_').toLowerCase()}`,
+              topicTitle: newTopic.title,
+              overview: newTopic.overview
+          };
+          setCustomTopics(prev => [...prev, newCustom]);
+          
+          // Auto-select the new topic
+          setTopic(newTopic.title);
+          localStorage.setItem('eburon_topic', newTopic.title);
+
+          setShowAddTopic(false);
+          setNewTopic({ title: '', tagline: '', overview: '' });
+      } catch (e: any) {
+          console.error("Failed to add topic", e);
+          alert("Failed to add topic: " + e.message);
+      } finally {
+          setIsAddingTopic(false);
+      }
+  };
+
+  const allTopics = [...EBURON_TOPICS.topics, ...customTopics];
+
   const voiceStyles = [
     "Dutch Flemish expressive",
     "Tagalog English Mix",
@@ -143,7 +200,6 @@ const Settings: React.FC = () => {
     "Russian Direct Tech"
   ];
 
-  // Map internal voice IDs to Star Aliases for UI display
   const voiceOptions = [
     { id: "Orus", label: "Sirius (System Default)" },
     { id: "Puck", label: "Vega" },
@@ -203,7 +259,7 @@ const Settings: React.FC = () => {
                 </h2>
                 <p className="text-xs text-zinc-400 mt-1 font-mono">KNOWLEDGE BASE & VOICE PARAMETERS</p>
             </div>
-            <div className="flex items-center gap-2">
+            <div className="flex items-center gap-4">
                 {isSyncing ? (
                     <div className="flex items-center gap-1 text-[10px] font-mono text-zinc-500">
                         <Loader2 className="w-3 h-3 animate-spin" /> SYNCING DB
@@ -213,6 +269,13 @@ const Settings: React.FC = () => {
                          <Cloud className="w-3 h-3" /> DB READY
                     </div>
                 )}
+                <button 
+                    onClick={() => setShowAddTopic(true)}
+                    className="p-2 bg-amber-600/20 hover:bg-amber-600 hover:text-white text-amber-500 rounded-full border border-amber-500/30 transition-all active:scale-95"
+                    title="Add Custom Topic"
+                >
+                    <Plus className="w-4 h-4" />
+                </button>
             </div>
         </div>
       </div>
@@ -239,11 +302,9 @@ const Settings: React.FC = () => {
                 onChange={(e) => setTopic(e.target.value)}
                 className="w-full bg-black/50 border border-zinc-700 rounded-lg p-4 appearance-none focus:border-amber-500 outline-none text-white font-mono text-sm transition-colors cursor-pointer group-hover:border-zinc-600"
               >
-                <option value="Eburon Aegis Vision">Eburon Aegis Vision Security</option>
-                <option value="Eburon Flyer">Eburon Flyer Project</option>
-                <option value="Decobu Messenger">Decobu Messenger Security</option>
-                <option value="Eburon Architecture" disabled>Eburon Architecture (Coming Soon)</option>
-                <option value="Voice Synthesis" disabled>Voice Synthesis Protocols (Coming Soon)</option>
+                {allTopics.map((t, idx) => (
+                     <option key={`${t.id}_${idx}`} value={t.topicTitle}>{t.topicTitle}</option>
+                ))}
               </select>
               <ChevronDown className="absolute right-4 top-1/2 -translate-y-1/2 w-5 h-5 text-zinc-500 pointer-events-none" />
             </div>
@@ -357,6 +418,78 @@ const Settings: React.FC = () => {
             </button>
          </div>
       </div>
+
+      {/* Add Topic Modal */}
+      {showAddTopic && (
+          <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/80 backdrop-blur-sm p-4">
+              <div className="bg-zinc-900 border border-zinc-700 rounded-2xl w-full max-w-2xl shadow-2xl flex flex-col max-h-[90vh]">
+                  <div className="p-6 border-b border-zinc-800 flex justify-between items-center">
+                      <h3 className="text-lg font-bold text-white flex items-center gap-2">
+                          <Plus className="w-5 h-5 text-amber-500" />
+                          Create New Knowledge Topic
+                      </h3>
+                      <button 
+                        onClick={() => setShowAddTopic(false)}
+                        className="text-zinc-500 hover:text-white transition-colors"
+                      >
+                          <X className="w-6 h-6" />
+                      </button>
+                  </div>
+                  
+                  <div className="p-6 overflow-y-auto space-y-6 flex-1">
+                      <div className="space-y-2">
+                          <label className="text-xs font-mono text-zinc-400 uppercase">Topic Title</label>
+                          <input 
+                            type="text" 
+                            value={newTopic.title}
+                            onChange={e => setNewTopic(prev => ({...prev, title: e.target.value}))}
+                            placeholder="e.g., Eburon Quantum Protocol"
+                            className="w-full bg-black/50 border border-zinc-700 rounded-lg px-4 py-3 focus:border-amber-500 outline-none text-white"
+                          />
+                      </div>
+                      
+                      <div className="space-y-2">
+                          <label className="text-xs font-mono text-zinc-400 uppercase">Tagline (Short Description)</label>
+                          <input 
+                            type="text" 
+                            value={newTopic.tagline}
+                            onChange={e => setNewTopic(prev => ({...prev, tagline: e.target.value}))}
+                            placeholder="e.g., Secure encryption for quantum era"
+                            className="w-full bg-black/50 border border-zinc-700 rounded-lg px-4 py-3 focus:border-amber-500 outline-none text-white"
+                          />
+                      </div>
+
+                      <div className="space-y-2">
+                          <label className="text-xs font-mono text-zinc-400 uppercase">Full Overview (Markdown/Text)</label>
+                          <textarea 
+                            value={newTopic.overview}
+                            onChange={e => setNewTopic(prev => ({...prev, overview: e.target.value}))}
+                            placeholder="# Overview&#10;Enter detailed briefing material here..."
+                            className="w-full h-64 bg-black/50 border border-zinc-700 rounded-lg px-4 py-3 focus:border-amber-500 outline-none text-white font-mono text-sm leading-relaxed resize-none"
+                          />
+                      </div>
+                  </div>
+
+                  <div className="p-6 border-t border-zinc-800 flex justify-end gap-3">
+                      <button 
+                        onClick={() => setShowAddTopic(false)}
+                        className="px-6 py-3 rounded-lg text-zinc-400 hover:bg-zinc-800 transition-colors font-medium"
+                      >
+                          Cancel
+                      </button>
+                      <button 
+                        onClick={handleAddTopic}
+                        disabled={isAddingTopic || !newTopic.title || !newTopic.overview}
+                        className="px-6 py-3 rounded-lg bg-amber-600 hover:bg-amber-500 text-white font-bold tracking-wide shadow-lg disabled:opacity-50 disabled:cursor-not-allowed flex items-center gap-2"
+                      >
+                          {isAddingTopic ? <Loader2 className="w-4 h-4 animate-spin" /> : null}
+                          ADD TOPIC
+                      </button>
+                  </div>
+              </div>
+          </div>
+      )}
+
     </div>
   );
 };
